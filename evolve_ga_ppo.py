@@ -126,7 +126,7 @@ class GAConfig:
     RESULTS_DIR: str = "results"
     ENV_PATH: str = ENV_PATHS.get(platform.system(), 
                         f"./builds/{platform.system().lower()}/tetris")
-    MAX_STEPS: int = 50000
+    MAX_STEPS: int = 500000
     POP_SIZE: int = 20
     N_GEN: int = 15
     CHECKPOINT_FREQ: int = 3
