@@ -138,7 +138,7 @@ class GAConfig:
     # GPU Configuration
     USE_GPU: bool = True  # Enable GPU if available
     GPU_DEVICE: Optional[int] = None  # Specific GPU device (None = auto-select)
-    GPU_MEMORY_FRACTION: float = 0.8  # Fraction of GPU memory to use
+    GPU_MEMORY_FRACTION: float = 0.95  # Fraction of GPU memory to use
     FORCE_CPU: bool = False  # Force CPU usage even if GPU available
     
     # Adaptive parameters
