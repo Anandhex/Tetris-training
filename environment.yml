@@ -17,6 +17,7 @@ dependencies:
   - xz
   - zlib
   - numpy=1.21.2 # pin version used in pip deps, or you can move numpy to pip
+  - pytorch=1.11.0
 
   - pip:
       - protobuf==3.20.3

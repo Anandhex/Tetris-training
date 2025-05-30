@@ -1975,3 +1975,4 @@ More information: https://developers.google.com/protocol-buffers/docs/news/2022-
 2025-05-30 10:37:49,838 - INFO - Config GA_Gen0_T1748594269_1751: Using CPU
 2025-05-30 10:37:49,851 - INFO - Starting training for Run GA_Gen0_T1748594269_1751
 2025-05-30 10:37:49,851 - INFO - Forced CPU usage for GA_Gen0_T1748594269_1751
+2025-05-30 10:40:10,136 - INFO - Evolution interrupted by user

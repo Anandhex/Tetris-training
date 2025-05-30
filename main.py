@@ -15,6 +15,7 @@ from tensorboard.backend.event_processing import event_accumulator
 from ruamel.yaml import YAML
 import pickle
 from pathlib import Path
+import torch
 
 # GPU detection imports
 try:
