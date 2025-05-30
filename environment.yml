@@ -1,4 +1,4 @@
-name: ml-unity
+name: ml-unit
 channels:
   - conda-forge
   - defaults
@@ -6,11 +6,9 @@ channels:
 dependencies:
   - python=3.9 # avoid exact patch/build version
   - pip
-  - blas=openblas
   - ca-certificates
   - libffi
   - openssl
-  - readline
   - setuptools
   - sqlite
   - tk
