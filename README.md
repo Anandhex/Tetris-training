@@ -81,10 +81,7 @@ If `main.py` supports command-line arguments:
 # Run with default settings
 python main.py
 
-# Example of possible arguments (adjust based on your implementation)
-python main.py --train          # Start training mode
-python main.py --inference      # Run inference with trained model
-python main.py --run-id my_run  # Custom run identifier
+
 ```
 
 The main script automatically:
@@ -92,7 +89,7 @@ The main script automatically:
 - Detects your operating system
 - Selects the appropriate Unity build (Windows/Mac/Linux)
 - Sets up ML-Agents configuration
-- Handles training or inference modes
+- Handles training
 
 ## Project Structure
 
