@@ -1,4 +1,4 @@
-name: ml-unit
+name: ml-unity
 channels:
   - conda-forge
   - defaults
