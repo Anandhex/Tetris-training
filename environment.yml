@@ -19,6 +19,7 @@ dependencies:
   - numpy=1.21.2 # pin version used in pip deps, or you can move numpy to pip
 
   - pip:
+      - protobuf==3.20.3
       - absl-py==2.2.2
       - astunparse==1.6.3
       - attrs==25.3.0

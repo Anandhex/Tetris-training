@@ -46,3 +46,1932 @@
 2025-05-30 09:16:14,736 - INFO - Starting training for Run GA_Gen0_T1748589374_5587
 2025-05-30 09:16:14,736 - INFO - Forced CPU usage for GA_Gen0_T1748589374_5587
 2025-05-30 09:16:19,835 - INFO - Evolution interrupted by user
+2025-05-30 10:36:06,854 - INFO - === GPU Configuration ===
+2025-05-30 10:36:06,854 - INFO - No GPU detected, using CPU
+2025-05-30 10:36:06,854 - INFO - Starting GA with 20 individuals for 15 generations
+2025-05-30 10:36:06,854 - INFO - Using device: CPU
+2025-05-30 10:36:06,855 - INFO - Generation 1/15
+2025-05-30 10:36:06,882 - INFO - Config GA_Gen0_T1748594166_9618: Using CPU
+2025-05-30 10:36:06,897 - INFO - Starting training for Run GA_Gen0_T1748594166_9618
+2025-05-30 10:36:06,897 - INFO - Forced CPU usage for GA_Gen0_T1748594166_9618
+2025-05-30 10:36:07,694 - ERROR - Training failed for GA_Gen0_T1748594166_9618
+2025-05-30 10:36:07,694 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:07,694 - ERROR - STDOUT: 
+2025-05-30 10:36:07,726 - INFO - Config GA_Gen0_T1748594167_6645: Using CPU
+2025-05-30 10:36:07,740 - INFO - Starting training for Run GA_Gen0_T1748594167_6645
+2025-05-30 10:36:07,740 - INFO - Forced CPU usage for GA_Gen0_T1748594167_6645
+2025-05-30 10:36:07,902 - ERROR - Training failed for GA_Gen0_T1748594167_6645
+2025-05-30 10:36:07,902 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:07,902 - ERROR - STDOUT: 
+2025-05-30 10:36:07,928 - INFO - Config GA_Gen0_T1748594167_9503: Using CPU
+2025-05-30 10:36:07,942 - INFO - Starting training for Run GA_Gen0_T1748594167_9503
+2025-05-30 10:36:07,942 - INFO - Forced CPU usage for GA_Gen0_T1748594167_9503
+2025-05-30 10:36:08,100 - ERROR - Training failed for GA_Gen0_T1748594167_9503
+2025-05-30 10:36:08,100 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:08,100 - ERROR - STDOUT: 
+2025-05-30 10:36:08,126 - INFO - Config GA_Gen0_T1748594168_7169: Using CPU
+2025-05-30 10:36:08,139 - INFO - Starting training for Run GA_Gen0_T1748594168_7169
+2025-05-30 10:36:08,139 - INFO - Forced CPU usage for GA_Gen0_T1748594168_7169
+2025-05-30 10:36:08,298 - ERROR - Training failed for GA_Gen0_T1748594168_7169
+2025-05-30 10:36:08,298 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:08,298 - ERROR - STDOUT: 
+2025-05-30 10:36:08,325 - INFO - Config GA_Gen0_T1748594168_4227: Using CPU
+2025-05-30 10:36:08,338 - INFO - Starting training for Run GA_Gen0_T1748594168_4227
+2025-05-30 10:36:08,338 - INFO - Forced CPU usage for GA_Gen0_T1748594168_4227
+2025-05-30 10:36:08,496 - ERROR - Training failed for GA_Gen0_T1748594168_4227
+2025-05-30 10:36:08,496 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:08,498 - ERROR - STDOUT: 
+2025-05-30 10:36:08,523 - INFO - Config GA_Gen0_T1748594168_5333: Using CPU
+2025-05-30 10:36:08,536 - INFO - Starting training for Run GA_Gen0_T1748594168_5333
+2025-05-30 10:36:08,536 - INFO - Forced CPU usage for GA_Gen0_T1748594168_5333
+2025-05-30 10:36:08,693 - ERROR - Training failed for GA_Gen0_T1748594168_5333
+2025-05-30 10:36:08,694 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:08,694 - ERROR - STDOUT: 
+2025-05-30 10:36:08,719 - INFO - Config GA_Gen0_T1748594168_6620: Using CPU
+2025-05-30 10:36:08,733 - INFO - Starting training for Run GA_Gen0_T1748594168_6620
+2025-05-30 10:36:08,733 - INFO - Forced CPU usage for GA_Gen0_T1748594168_6620
+2025-05-30 10:36:08,890 - ERROR - Training failed for GA_Gen0_T1748594168_6620
+2025-05-30 10:36:08,890 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:08,891 - ERROR - STDOUT: 
+2025-05-30 10:36:08,917 - INFO - Config GA_Gen0_T1748594168_2977: Using CPU
+2025-05-30 10:36:08,930 - INFO - Starting training for Run GA_Gen0_T1748594168_2977
+2025-05-30 10:36:08,930 - INFO - Forced CPU usage for GA_Gen0_T1748594168_2977
+2025-05-30 10:36:09,089 - ERROR - Training failed for GA_Gen0_T1748594168_2977
+2025-05-30 10:36:09,089 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:09,089 - ERROR - STDOUT: 
+2025-05-30 10:36:09,115 - INFO - Config GA_Gen0_T1748594169_4500: Using CPU
+2025-05-30 10:36:09,128 - INFO - Starting training for Run GA_Gen0_T1748594169_4500
+2025-05-30 10:36:09,128 - INFO - Forced CPU usage for GA_Gen0_T1748594169_4500
+2025-05-30 10:36:09,290 - ERROR - Training failed for GA_Gen0_T1748594169_4500
+2025-05-30 10:36:09,290 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:09,290 - ERROR - STDOUT: 
+2025-05-30 10:36:09,316 - INFO - Config GA_Gen0_T1748594169_5780: Using CPU
+2025-05-30 10:36:09,329 - INFO - Starting training for Run GA_Gen0_T1748594169_5780
+2025-05-30 10:36:09,329 - INFO - Forced CPU usage for GA_Gen0_T1748594169_5780
+2025-05-30 10:36:09,490 - ERROR - Training failed for GA_Gen0_T1748594169_5780
+2025-05-30 10:36:09,490 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:09,491 - ERROR - STDOUT: 
+2025-05-30 10:36:09,517 - INFO - Config GA_Gen0_T1748594169_3207: Using CPU
+2025-05-30 10:36:09,530 - INFO - Starting training for Run GA_Gen0_T1748594169_3207
+2025-05-30 10:36:09,530 - INFO - Forced CPU usage for GA_Gen0_T1748594169_3207
+2025-05-30 10:36:09,699 - ERROR - Training failed for GA_Gen0_T1748594169_3207
+2025-05-30 10:36:09,699 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:09,699 - ERROR - STDOUT: 
+2025-05-30 10:36:09,725 - INFO - Config GA_Gen0_T1748594169_6777: Using CPU
+2025-05-30 10:36:09,738 - INFO - Starting training for Run GA_Gen0_T1748594169_6777
+2025-05-30 10:36:09,739 - INFO - Forced CPU usage for GA_Gen0_T1748594169_6777
+2025-05-30 10:36:09,900 - ERROR - Training failed for GA_Gen0_T1748594169_6777
+2025-05-30 10:36:09,900 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:09,900 - ERROR - STDOUT: 
+2025-05-30 10:36:09,926 - INFO - Config GA_Gen0_T1748594169_6045: Using CPU
+2025-05-30 10:36:09,939 - INFO - Starting training for Run GA_Gen0_T1748594169_6045
+2025-05-30 10:36:09,939 - INFO - Forced CPU usage for GA_Gen0_T1748594169_6045
+2025-05-30 10:36:10,098 - ERROR - Training failed for GA_Gen0_T1748594169_6045
+2025-05-30 10:36:10,098 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:10,099 - ERROR - STDOUT: 
+2025-05-30 10:36:10,126 - INFO - Config GA_Gen0_T1748594170_4447: Using CPU
+2025-05-30 10:36:10,140 - INFO - Starting training for Run GA_Gen0_T1748594170_4447
+2025-05-30 10:36:10,140 - INFO - Forced CPU usage for GA_Gen0_T1748594170_4447
+2025-05-30 10:36:10,305 - ERROR - Training failed for GA_Gen0_T1748594170_4447
+2025-05-30 10:36:10,305 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:10,306 - ERROR - STDOUT: 
+2025-05-30 10:36:10,332 - INFO - Config GA_Gen0_T1748594170_6284: Using CPU
+2025-05-30 10:36:10,345 - INFO - Starting training for Run GA_Gen0_T1748594170_6284
+2025-05-30 10:36:10,345 - INFO - Forced CPU usage for GA_Gen0_T1748594170_6284
+2025-05-30 10:36:10,510 - ERROR - Training failed for GA_Gen0_T1748594170_6284
+2025-05-30 10:36:10,511 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:10,511 - ERROR - STDOUT: 
+2025-05-30 10:36:10,537 - INFO - Config GA_Gen0_T1748594170_6097: Using CPU
+2025-05-30 10:36:10,551 - INFO - Starting training for Run GA_Gen0_T1748594170_6097
+2025-05-30 10:36:10,551 - INFO - Forced CPU usage for GA_Gen0_T1748594170_6097
+2025-05-30 10:36:10,711 - ERROR - Training failed for GA_Gen0_T1748594170_6097
+2025-05-30 10:36:10,712 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:10,712 - ERROR - STDOUT: 
+2025-05-30 10:36:10,738 - INFO - Config GA_Gen0_T1748594170_9789: Using CPU
+2025-05-30 10:36:10,751 - INFO - Starting training for Run GA_Gen0_T1748594170_9789
+2025-05-30 10:36:10,751 - INFO - Forced CPU usage for GA_Gen0_T1748594170_9789
+2025-05-30 10:36:10,913 - ERROR - Training failed for GA_Gen0_T1748594170_9789
+2025-05-30 10:36:10,913 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:10,913 - ERROR - STDOUT: 
+2025-05-30 10:36:10,940 - INFO - Config GA_Gen0_T1748594170_3841: Using CPU
+2025-05-30 10:36:10,953 - INFO - Starting training for Run GA_Gen0_T1748594170_3841
+2025-05-30 10:36:10,953 - INFO - Forced CPU usage for GA_Gen0_T1748594170_3841
+2025-05-30 10:36:11,113 - ERROR - Training failed for GA_Gen0_T1748594170_3841
+2025-05-30 10:36:11,113 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:11,113 - ERROR - STDOUT: 
+2025-05-30 10:36:11,139 - INFO - Config GA_Gen0_T1748594171_5231: Using CPU
+2025-05-30 10:36:11,164 - INFO - Starting training for Run GA_Gen0_T1748594171_5231
+2025-05-30 10:36:11,164 - INFO - Forced CPU usage for GA_Gen0_T1748594171_5231
+2025-05-30 10:36:11,325 - ERROR - Training failed for GA_Gen0_T1748594171_5231
+2025-05-30 10:36:11,326 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:11,326 - ERROR - STDOUT: 
+2025-05-30 10:36:11,352 - INFO - Config GA_Gen0_T1748594171_5371: Using CPU
+2025-05-30 10:36:11,365 - INFO - Starting training for Run GA_Gen0_T1748594171_5371
+2025-05-30 10:36:11,366 - INFO - Forced CPU usage for GA_Gen0_T1748594171_5371
+2025-05-30 10:36:11,529 - ERROR - Training failed for GA_Gen0_T1748594171_5371
+2025-05-30 10:36:11,530 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:11,530 - ERROR - STDOUT: 
+2025-05-30 10:36:11,531 - INFO - Gen 1 completed in 4.7s - Max: 0.00, Avg: 0.00, Std: 0.00, Min: 0.00
+2025-05-30 10:36:11,532 - INFO - Generation 2/15
+2025-05-30 10:36:11,558 - INFO - Config GA_Gen1_T1748594171_9498: Using CPU
+2025-05-30 10:36:11,571 - INFO - Starting training for Run GA_Gen1_T1748594171_9498
+2025-05-30 10:36:11,571 - INFO - Forced CPU usage for GA_Gen1_T1748594171_9498
+2025-05-30 10:36:11,737 - ERROR - Training failed for GA_Gen1_T1748594171_9498
+2025-05-30 10:36:11,738 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:11,738 - ERROR - STDOUT: 
+2025-05-30 10:36:11,764 - INFO - Config GA_Gen1_T1748594171_6827: Using CPU
+2025-05-30 10:36:11,777 - INFO - Starting training for Run GA_Gen1_T1748594171_6827
+2025-05-30 10:36:11,777 - INFO - Forced CPU usage for GA_Gen1_T1748594171_6827
+2025-05-30 10:36:11,944 - ERROR - Training failed for GA_Gen1_T1748594171_6827
+2025-05-30 10:36:11,944 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:11,944 - ERROR - STDOUT: 
+2025-05-30 10:36:11,970 - INFO - Config GA_Gen1_T1748594171_7111: Using CPU
+2025-05-30 10:36:11,983 - INFO - Starting training for Run GA_Gen1_T1748594171_7111
+2025-05-30 10:36:11,984 - INFO - Forced CPU usage for GA_Gen1_T1748594171_7111
+2025-05-30 10:36:12,151 - ERROR - Training failed for GA_Gen1_T1748594171_7111
+2025-05-30 10:36:12,151 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:12,151 - ERROR - STDOUT: 
+2025-05-30 10:36:12,177 - INFO - Config GA_Gen1_T1748594172_3812: Using CPU
+2025-05-30 10:36:12,190 - INFO - Starting training for Run GA_Gen1_T1748594172_3812
+2025-05-30 10:36:12,190 - INFO - Forced CPU usage for GA_Gen1_T1748594172_3812
+2025-05-30 10:36:12,358 - ERROR - Training failed for GA_Gen1_T1748594172_3812
+2025-05-30 10:36:12,358 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:12,358 - ERROR - STDOUT: 
+2025-05-30 10:36:12,384 - INFO - Config GA_Gen1_T1748594172_3218: Using CPU
+2025-05-30 10:36:12,398 - INFO - Starting training for Run GA_Gen1_T1748594172_3218
+2025-05-30 10:36:12,398 - INFO - Forced CPU usage for GA_Gen1_T1748594172_3218
+2025-05-30 10:36:12,558 - ERROR - Training failed for GA_Gen1_T1748594172_3218
+2025-05-30 10:36:12,558 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:12,558 - ERROR - STDOUT: 
+2025-05-30 10:36:12,584 - INFO - Config GA_Gen1_T1748594172_4912: Using CPU
+2025-05-30 10:36:12,597 - INFO - Starting training for Run GA_Gen1_T1748594172_4912
+2025-05-30 10:36:12,598 - INFO - Forced CPU usage for GA_Gen1_T1748594172_4912
+2025-05-30 10:36:12,758 - ERROR - Training failed for GA_Gen1_T1748594172_4912
+2025-05-30 10:36:12,758 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:12,758 - ERROR - STDOUT: 
+2025-05-30 10:36:12,785 - INFO - Config GA_Gen1_T1748594172_6684: Using CPU
+2025-05-30 10:36:12,797 - INFO - Starting training for Run GA_Gen1_T1748594172_6684
+2025-05-30 10:36:12,798 - INFO - Forced CPU usage for GA_Gen1_T1748594172_6684
+2025-05-30 10:36:12,958 - ERROR - Training failed for GA_Gen1_T1748594172_6684
+2025-05-30 10:36:12,958 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:12,958 - ERROR - STDOUT: 
+2025-05-30 10:36:12,985 - INFO - Config GA_Gen1_T1748594172_8711: Using CPU
+2025-05-30 10:36:12,998 - INFO - Starting training for Run GA_Gen1_T1748594172_8711
+2025-05-30 10:36:12,998 - INFO - Forced CPU usage for GA_Gen1_T1748594172_8711
+2025-05-30 10:36:13,161 - ERROR - Training failed for GA_Gen1_T1748594172_8711
+2025-05-30 10:36:13,161 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:13,161 - ERROR - STDOUT: 
+2025-05-30 10:36:13,188 - INFO - Config GA_Gen1_T1748594173_1743: Using CPU
+2025-05-30 10:36:13,201 - INFO - Starting training for Run GA_Gen1_T1748594173_1743
+2025-05-30 10:36:13,201 - INFO - Forced CPU usage for GA_Gen1_T1748594173_1743
+2025-05-30 10:36:13,361 - ERROR - Training failed for GA_Gen1_T1748594173_1743
+2025-05-30 10:36:13,361 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:13,361 - ERROR - STDOUT: 
+2025-05-30 10:36:13,388 - INFO - Config GA_Gen1_T1748594173_5283: Using CPU
+2025-05-30 10:36:13,401 - INFO - Starting training for Run GA_Gen1_T1748594173_5283
+2025-05-30 10:36:13,401 - INFO - Forced CPU usage for GA_Gen1_T1748594173_5283
+2025-05-30 10:36:13,560 - ERROR - Training failed for GA_Gen1_T1748594173_5283
+2025-05-30 10:36:13,560 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:13,560 - ERROR - STDOUT: 
+2025-05-30 10:36:13,586 - INFO - Config GA_Gen1_T1748594173_3813: Using CPU
+2025-05-30 10:36:13,600 - INFO - Starting training for Run GA_Gen1_T1748594173_3813
+2025-05-30 10:36:13,600 - INFO - Forced CPU usage for GA_Gen1_T1748594173_3813
+2025-05-30 10:36:13,765 - ERROR - Training failed for GA_Gen1_T1748594173_3813
+2025-05-30 10:36:13,766 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:13,766 - ERROR - STDOUT: 
+2025-05-30 10:36:13,792 - INFO - Config GA_Gen1_T1748594173_8969: Using CPU
+2025-05-30 10:36:13,805 - INFO - Starting training for Run GA_Gen1_T1748594173_8969
+2025-05-30 10:36:13,805 - INFO - Forced CPU usage for GA_Gen1_T1748594173_8969
+2025-05-30 10:36:13,965 - ERROR - Training failed for GA_Gen1_T1748594173_8969
+2025-05-30 10:36:13,965 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:13,965 - ERROR - STDOUT: 
+2025-05-30 10:36:13,992 - INFO - Config GA_Gen1_T1748594173_5737: Using CPU
+2025-05-30 10:36:14,005 - INFO - Starting training for Run GA_Gen1_T1748594173_5737
+2025-05-30 10:36:14,005 - INFO - Forced CPU usage for GA_Gen1_T1748594173_5737
+2025-05-30 10:36:14,164 - ERROR - Training failed for GA_Gen1_T1748594173_5737
+2025-05-30 10:36:14,164 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:14,164 - ERROR - STDOUT: 
+2025-05-30 10:36:14,191 - INFO - Config GA_Gen1_T1748594174_4211: Using CPU
+2025-05-30 10:36:14,204 - INFO - Starting training for Run GA_Gen1_T1748594174_4211
+2025-05-30 10:36:14,204 - INFO - Forced CPU usage for GA_Gen1_T1748594174_4211
+2025-05-30 10:36:14,363 - ERROR - Training failed for GA_Gen1_T1748594174_4211
+2025-05-30 10:36:14,363 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:14,363 - ERROR - STDOUT: 
+2025-05-30 10:36:14,390 - INFO - Config GA_Gen1_T1748594174_6488: Using CPU
+2025-05-30 10:36:14,403 - INFO - Starting training for Run GA_Gen1_T1748594174_6488
+2025-05-30 10:36:14,403 - INFO - Forced CPU usage for GA_Gen1_T1748594174_6488
+2025-05-30 10:36:14,561 - ERROR - Training failed for GA_Gen1_T1748594174_6488
+2025-05-30 10:36:14,561 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:14,561 - ERROR - STDOUT: 
+2025-05-30 10:36:14,595 - INFO - Config GA_Gen1_T1748594174_2399: Using CPU
+2025-05-30 10:36:14,609 - INFO - Starting training for Run GA_Gen1_T1748594174_2399
+2025-05-30 10:36:14,609 - INFO - Forced CPU usage for GA_Gen1_T1748594174_2399
+2025-05-30 10:36:14,772 - ERROR - Training failed for GA_Gen1_T1748594174_2399
+2025-05-30 10:36:14,772 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:14,773 - ERROR - STDOUT: 
+2025-05-30 10:36:14,799 - INFO - Config GA_Gen1_T1748594174_9188: Using CPU
+2025-05-30 10:36:14,812 - INFO - Starting training for Run GA_Gen1_T1748594174_9188
+2025-05-30 10:36:14,812 - INFO - Forced CPU usage for GA_Gen1_T1748594174_9188
+2025-05-30 10:36:14,972 - ERROR - Training failed for GA_Gen1_T1748594174_9188
+2025-05-30 10:36:14,972 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:14,973 - ERROR - STDOUT: 
+2025-05-30 10:36:14,999 - INFO - Config GA_Gen1_T1748594174_7107: Using CPU
+2025-05-30 10:36:15,012 - INFO - Starting training for Run GA_Gen1_T1748594174_7107
+2025-05-30 10:36:15,012 - INFO - Forced CPU usage for GA_Gen1_T1748594174_7107
+2025-05-30 10:36:15,174 - ERROR - Training failed for GA_Gen1_T1748594174_7107
+2025-05-30 10:36:15,174 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:15,174 - ERROR - STDOUT: 
+2025-05-30 10:36:15,201 - INFO - Config GA_Gen1_T1748594175_6091: Using CPU
+2025-05-30 10:36:15,214 - INFO - Starting training for Run GA_Gen1_T1748594175_6091
+2025-05-30 10:36:15,214 - INFO - Forced CPU usage for GA_Gen1_T1748594175_6091
+2025-05-30 10:36:15,374 - ERROR - Training failed for GA_Gen1_T1748594175_6091
+2025-05-30 10:36:15,374 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:15,374 - ERROR - STDOUT: 
+2025-05-30 10:36:15,401 - INFO - Config GA_Gen1_T1748594175_5969: Using CPU
+2025-05-30 10:36:15,414 - INFO - Starting training for Run GA_Gen1_T1748594175_5969
+2025-05-30 10:36:15,414 - INFO - Forced CPU usage for GA_Gen1_T1748594175_5969
+2025-05-30 10:36:15,574 - ERROR - Training failed for GA_Gen1_T1748594175_5969
+2025-05-30 10:36:15,574 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:15,575 - ERROR - STDOUT: 
+2025-05-30 10:36:15,575 - INFO - Gen 2 completed in 4.0s - Max: 0.00, Avg: 0.00, Std: 0.00, Min: 0.00
+2025-05-30 10:36:15,576 - INFO - Generation 3/15
+2025-05-30 10:36:15,603 - INFO - Config GA_Gen2_T1748594175_5163: Using CPU
+2025-05-30 10:36:15,616 - INFO - Starting training for Run GA_Gen2_T1748594175_5163
+2025-05-30 10:36:15,616 - INFO - Forced CPU usage for GA_Gen2_T1748594175_5163
+2025-05-30 10:36:15,783 - ERROR - Training failed for GA_Gen2_T1748594175_5163
+2025-05-30 10:36:15,783 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:15,784 - ERROR - STDOUT: 
+2025-05-30 10:36:15,810 - INFO - Config GA_Gen2_T1748594175_2604: Using CPU
+2025-05-30 10:36:15,823 - INFO - Starting training for Run GA_Gen2_T1748594175_2604
+2025-05-30 10:36:15,823 - INFO - Forced CPU usage for GA_Gen2_T1748594175_2604
+2025-05-30 10:36:15,986 - ERROR - Training failed for GA_Gen2_T1748594175_2604
+2025-05-30 10:36:15,986 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:15,987 - ERROR - STDOUT: 
+2025-05-30 10:36:16,013 - INFO - Config GA_Gen2_T1748594175_3718: Using CPU
+2025-05-30 10:36:16,026 - INFO - Starting training for Run GA_Gen2_T1748594175_3718
+2025-05-30 10:36:16,026 - INFO - Forced CPU usage for GA_Gen2_T1748594175_3718
+2025-05-30 10:36:16,192 - ERROR - Training failed for GA_Gen2_T1748594175_3718
+2025-05-30 10:36:16,192 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:16,193 - ERROR - STDOUT: 
+2025-05-30 10:36:16,219 - INFO - Config GA_Gen2_T1748594176_1164: Using CPU
+2025-05-30 10:36:16,232 - INFO - Starting training for Run GA_Gen2_T1748594176_1164
+2025-05-30 10:36:16,232 - INFO - Forced CPU usage for GA_Gen2_T1748594176_1164
+2025-05-30 10:36:16,395 - ERROR - Training failed for GA_Gen2_T1748594176_1164
+2025-05-30 10:36:16,395 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:16,396 - ERROR - STDOUT: 
+2025-05-30 10:36:16,422 - INFO - Config GA_Gen2_T1748594176_4822: Using CPU
+2025-05-30 10:36:16,435 - INFO - Starting training for Run GA_Gen2_T1748594176_4822
+2025-05-30 10:36:16,435 - INFO - Forced CPU usage for GA_Gen2_T1748594176_4822
+2025-05-30 10:36:16,596 - ERROR - Training failed for GA_Gen2_T1748594176_4822
+2025-05-30 10:36:16,597 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:16,597 - ERROR - STDOUT: 
+2025-05-30 10:36:16,623 - INFO - Config GA_Gen2_T1748594176_2369: Using CPU
+2025-05-30 10:36:16,636 - INFO - Starting training for Run GA_Gen2_T1748594176_2369
+2025-05-30 10:36:16,636 - INFO - Forced CPU usage for GA_Gen2_T1748594176_2369
+2025-05-30 10:36:16,796 - ERROR - Training failed for GA_Gen2_T1748594176_2369
+2025-05-30 10:36:16,796 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:16,796 - ERROR - STDOUT: 
+2025-05-30 10:36:16,822 - INFO - Config GA_Gen2_T1748594176_9436: Using CPU
+2025-05-30 10:36:16,836 - INFO - Starting training for Run GA_Gen2_T1748594176_9436
+2025-05-30 10:36:16,836 - INFO - Forced CPU usage for GA_Gen2_T1748594176_9436
+2025-05-30 10:36:16,996 - ERROR - Training failed for GA_Gen2_T1748594176_9436
+2025-05-30 10:36:16,996 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:16,996 - ERROR - STDOUT: 
+2025-05-30 10:36:17,023 - INFO - Config GA_Gen2_T1748594176_1814: Using CPU
+2025-05-30 10:36:17,036 - INFO - Starting training for Run GA_Gen2_T1748594176_1814
+2025-05-30 10:36:17,036 - INFO - Forced CPU usage for GA_Gen2_T1748594176_1814
+2025-05-30 10:36:17,195 - ERROR - Training failed for GA_Gen2_T1748594176_1814
+2025-05-30 10:36:17,196 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:17,196 - ERROR - STDOUT: 
+2025-05-30 10:36:17,222 - INFO - Config GA_Gen2_T1748594177_1458: Using CPU
+2025-05-30 10:36:17,235 - INFO - Starting training for Run GA_Gen2_T1748594177_1458
+2025-05-30 10:36:17,235 - INFO - Forced CPU usage for GA_Gen2_T1748594177_1458
+2025-05-30 10:36:17,394 - ERROR - Training failed for GA_Gen2_T1748594177_1458
+2025-05-30 10:36:17,394 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:17,394 - ERROR - STDOUT: 
+2025-05-30 10:36:17,420 - INFO - Config GA_Gen2_T1748594177_7961: Using CPU
+2025-05-30 10:36:17,434 - INFO - Starting training for Run GA_Gen2_T1748594177_7961
+2025-05-30 10:36:17,434 - INFO - Forced CPU usage for GA_Gen2_T1748594177_7961
+2025-05-30 10:36:17,592 - ERROR - Training failed for GA_Gen2_T1748594177_7961
+2025-05-30 10:36:17,592 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:17,592 - ERROR - STDOUT: 
+2025-05-30 10:36:17,618 - INFO - Config GA_Gen2_T1748594177_4734: Using CPU
+2025-05-30 10:36:17,631 - INFO - Starting training for Run GA_Gen2_T1748594177_4734
+2025-05-30 10:36:17,631 - INFO - Forced CPU usage for GA_Gen2_T1748594177_4734
+2025-05-30 10:36:17,790 - ERROR - Training failed for GA_Gen2_T1748594177_4734
+2025-05-30 10:36:17,790 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:17,790 - ERROR - STDOUT: 
+2025-05-30 10:36:17,816 - INFO - Config GA_Gen2_T1748594177_7387: Using CPU
+2025-05-30 10:36:17,829 - INFO - Starting training for Run GA_Gen2_T1748594177_7387
+2025-05-30 10:36:17,829 - INFO - Forced CPU usage for GA_Gen2_T1748594177_7387
+2025-05-30 10:36:17,989 - ERROR - Training failed for GA_Gen2_T1748594177_7387
+2025-05-30 10:36:17,989 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:17,990 - ERROR - STDOUT: 
+2025-05-30 10:36:18,016 - INFO - Config GA_Gen2_T1748594177_9204: Using CPU
+2025-05-30 10:36:18,028 - INFO - Starting training for Run GA_Gen2_T1748594177_9204
+2025-05-30 10:36:18,029 - INFO - Forced CPU usage for GA_Gen2_T1748594177_9204
+2025-05-30 10:36:18,189 - ERROR - Training failed for GA_Gen2_T1748594177_9204
+2025-05-30 10:36:18,189 - ERROR - STDERR: Traceback (most recent call last):
+  File "/opt/anaconda3/envs/ml-unit/bin/mlagents-learn", line 5, in <module>
+    from mlagents.trainers.learn import main
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/learn.py", line 2, in <module>
+    from mlagents import torch_utils
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/__init__.py", line 1, in <module>
+    from mlagents.torch_utils.torch import torch as torch  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/torch_utils/torch.py", line 6, in <module>
+    from mlagents.trainers.settings import TorchSettings
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/settings.py", line 25, in <module>
+    from mlagents.trainers.cli_utils import StoreConfigFile, DetectDefault, parser
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents/trainers/cli_utils.py", line 5, in <module>
+    from mlagents_envs.environment import UnityEnvironment
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/environment.py", line 12, in <module>
+    from mlagents_envs.side_channel.side_channel import SideChannel
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/__init__.py", line 5, in <module>
+    from mlagents_envs.side_channel.default_training_analytics_side_channel import (  # noqa
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/side_channel/default_training_analytics_side_channel.py", line 7, in <module>
+    from mlagents_envs.communicator_objects.training_analytics_pb2 import (
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/mlagents_envs/communicator_objects/training_analytics_pb2.py", line 35, in <module>
+    _descriptor.FieldDescriptor(
+  File "/opt/anaconda3/envs/ml-unit/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 621, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+
+More information: https://developers.google.com/protocol-buffers/docs/news/2022-05-06#python-updates
+
+2025-05-30 10:36:18,189 - ERROR - STDOUT: 
+2025-05-30 10:36:18,215 - INFO - Config GA_Gen2_T1748594178_4729: Using CPU
+2025-05-30 10:36:18,228 - INFO - Starting training for Run GA_Gen2_T1748594178_4729
+2025-05-30 10:36:18,228 - INFO - Forced CPU usage for GA_Gen2_T1748594178_4729
+2025-05-30 10:36:18,321 - INFO - Evolution interrupted by user
+2025-05-30 10:37:49,810 - INFO - === GPU Configuration ===
+2025-05-30 10:37:49,810 - INFO - No GPU detected, using CPU
+2025-05-30 10:37:49,810 - INFO - Starting GA with 20 individuals for 15 generations
+2025-05-30 10:37:49,811 - INFO - Using device: CPU
+2025-05-30 10:37:49,811 - INFO - Generation 1/15
+2025-05-30 10:37:49,838 - INFO - Config GA_Gen0_T1748594269_1751: Using CPU
+2025-05-30 10:37:49,851 - INFO - Starting training for Run GA_Gen0_T1748594269_1751
+2025-05-30 10:37:49,851 - INFO - Forced CPU usage for GA_Gen0_T1748594269_1751
