@@ -1,0 +1,4 @@
+/configs/*.meta
+
+/configs/*
+/results/*

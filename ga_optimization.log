@@ -1,0 +1,48 @@
+2025-05-30 09:11:11,554 - INFO - === GPU Configuration ===
+2025-05-30 09:11:11,554 - INFO - No GPU detected, using CPU
+2025-05-30 09:11:11,554 - INFO - Starting GA with 20 individuals for 15 generations
+2025-05-30 09:11:11,554 - INFO - Using device: CPU
+2025-05-30 09:11:11,555 - INFO - Generation 1/15
+2025-05-30 09:11:11,576 - INFO - Config GA_Gen0_T1748589071_6620: Using CPU
+2025-05-30 09:11:11,599 - INFO - Starting training for Run GA_Gen0_T1748589071_6620
+2025-05-30 09:11:11,599 - INFO - Forced CPU usage for GA_Gen0_T1748589071_6620
+2025-05-30 09:12:24,542 - INFO - Searching for logs for run_id: GA_Gen0_T1748589071_6620
+2025-05-30 09:12:24,558 - INFO - Found event files in: results/GA_Gen0_T1748589071_6620/TetrisAgent
+2025-05-30 09:12:24,747 - INFO - No path found after results/GA_Gen0_T1748589071_6620/TetrisAgent/events.out.tfevents.1748589075.Anands-MacBook-Air.local.78757.0
+2025-05-30 09:12:24,748 - INFO - Using reward tag: Environment/Cumulative Reward
+2025-05-30 09:12:24,748 - INFO - Found 50 reward values for GA_Gen0_T1748589071_6620
+2025-05-30 09:12:24,750 - INFO - Calculated fitness for GA_Gen0_T1748589071_6620: 564.2694 (from 10 filtered values)
+2025-05-30 09:12:24,750 - INFO - Training completed for GA_Gen0_T1748589071_6620, fitness: 564.269356584549
+2025-05-30 09:12:24,777 - INFO - Config GA_Gen0_T1748589144_1247: Using CPU
+2025-05-30 09:12:24,794 - INFO - Starting training for Run GA_Gen0_T1748589144_1247
+2025-05-30 09:12:24,794 - INFO - Forced CPU usage for GA_Gen0_T1748589144_1247
+2025-05-30 09:13:25,232 - INFO - Searching for logs for run_id: GA_Gen0_T1748589144_1247
+2025-05-30 09:13:25,235 - INFO - Found event files in: results/GA_Gen0_T1748589144_1247/TetrisAgent
+2025-05-30 09:13:25,352 - INFO - No path found after results/GA_Gen0_T1748589144_1247/TetrisAgent/events.out.tfevents.1748589150.Anands-MacBook-Air.local.78848.0
+2025-05-30 09:13:25,352 - INFO - Using reward tag: Environment/Cumulative Reward
+2025-05-30 09:13:25,352 - INFO - Found 44 reward values for GA_Gen0_T1748589144_1247
+2025-05-30 09:13:25,352 - INFO - Calculated fitness for GA_Gen0_T1748589144_1247: 1381.8716 (from 8 filtered values)
+2025-05-30 09:13:25,353 - INFO - Training completed for GA_Gen0_T1748589144_1247, fitness: 1381.8715534210205
+2025-05-30 09:13:25,371 - INFO - Config GA_Gen0_T1748589205_3403: Using CPU
+2025-05-30 09:13:25,382 - INFO - Starting training for Run GA_Gen0_T1748589205_3403
+2025-05-30 09:13:25,382 - INFO - Forced CPU usage for GA_Gen0_T1748589205_3403
+2025-05-30 09:15:41,520 - INFO - Searching for logs for run_id: GA_Gen0_T1748589205_3403
+2025-05-30 09:15:41,527 - INFO - Found event files in: results/GA_Gen0_T1748589205_3403/TetrisAgent
+2025-05-30 09:15:41,663 - INFO - No path found after results/GA_Gen0_T1748589205_3403/TetrisAgent/events.out.tfevents.1748589208.Anands-MacBook-Air.local.78966.0
+2025-05-30 09:15:41,664 - INFO - Using reward tag: Environment/Cumulative Reward
+2025-05-30 09:15:41,664 - INFO - Found 47 reward values for GA_Gen0_T1748589205_3403
+2025-05-30 09:15:41,664 - INFO - Calculated fitness for GA_Gen0_T1748589205_3403: 209.0200 (from 9 filtered values)
+2025-05-30 09:15:41,665 - INFO - Training completed for GA_Gen0_T1748589205_3403, fitness: 209.01995944976807
+2025-05-30 09:15:41,689 - INFO - Config GA_Gen0_T1748589341_9883: Using CPU
+2025-05-30 09:15:41,700 - INFO - Starting training for Run GA_Gen0_T1748589341_9883
+2025-05-30 09:15:41,700 - INFO - Forced CPU usage for GA_Gen0_T1748589341_9883
+2025-05-30 09:16:12,992 - INFO - Evolution interrupted by user
+2025-05-30 09:16:14,704 - INFO - === GPU Configuration ===
+2025-05-30 09:16:14,704 - INFO - No GPU detected, using CPU
+2025-05-30 09:16:14,705 - INFO - Starting GA with 20 individuals for 15 generations
+2025-05-30 09:16:14,705 - INFO - Using device: CPU
+2025-05-30 09:16:14,705 - INFO - Generation 1/15
+2025-05-30 09:16:14,725 - INFO - Config GA_Gen0_T1748589374_5587: Using CPU
+2025-05-30 09:16:14,736 - INFO - Starting training for Run GA_Gen0_T1748589374_5587
+2025-05-30 09:16:14,736 - INFO - Forced CPU usage for GA_Gen0_T1748589374_5587
+2025-05-30 09:16:19,835 - INFO - Evolution interrupted by user
