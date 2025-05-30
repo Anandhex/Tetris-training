@@ -55,4 +55,4 @@ dependencies:
       - packaging==25.0
       - pathspec==0.12.1
       - pettingzoo==1.15.0
-      - ruamel-yaml=0.18.12
+      - ruamel-yaml==0.18.12
