@@ -9,6 +9,7 @@ A reinforcement learning project that trains AI agents to play Tetris using Unit
 - Cross-platform Unity builds (Windows, macOS, Linux)
 - TensorFlow and PyTorch support for neural networks
 - Configurable training parameters
+- Graphics mode for visualization and testing
 
 ## Prerequisites
 
@@ -61,9 +62,9 @@ This environment includes:
 
 ## Usage
 
-### Running the Project
+### Training Mode (Headless)
 
-The `main.py` file handles all the setup and configuration automatically:
+The `main.py` file handles all the setup and configuration automatically for training:
 
 ```bash
 # Always activate the environment first
@@ -73,32 +74,54 @@ conda activate ml-unity
 python main.py
 ```
 
-### Advanced Usage
+### Graphics Mode (Visualization)
 
-If `main.py` supports command-line arguments:
+Use `with_graphics.py` to run the game with visual interface using preset configurations:
 
 ```bash
-# Run with default settings
-python main.py
+# Always activate the environment first
+conda activate ml-unity
 
-
+# Run with graphics for visualization and testing
+python with_graphics.py
 ```
 
-The main script automatically:
+The graphics mode automatically:
 
-- Detects your operating system
-- Selects the appropriate Unity build (Windows/Mac/Linux)
-- Sets up ML-Agents configuration
-- Handles training
+- Loads configuration from `data_config.yaml`
+- Runs the Unity build with graphics enabled
+- Provides visual feedback for agent performance
+- Ideal for testing trained models or demonstrations
+
+### Advanced Usage
+
+If the scripts support command-line arguments:
+
+```bash
+# Run training with default settings
+python main.py
+
+# Run graphics mode with default settings
+python with_graphics.py
+```
+
+Both scripts automatically:
+
+- Detect your operating system
+- Select the appropriate Unity build (Windows/Mac/Linux)
+- Set up ML-Agents configuration
+- Handle execution with appropriate settings
 
 ## Project Structure
 
 ```
 Tetris-training/
 ├── environment.yml          # Conda environment configuration
-├── main.py                 # Main script - handles all setup and execution
+├── main.py                 # Main training script - handles headless training
+├── with_graphics.py        # Graphics mode script - handles visual execution
 ├── config/                 # ML-Agents training configurations
 │   └── various configs
+├── data_config.yaml        # Configuration file for graphics mode
 ├── results/                # Training results and tensorboard logs
 ├── builds/                 # Unity builds for different platforms
 │   ├── windows/
@@ -110,9 +133,11 @@ Tetris-training/
 └── README.md              # This file
 ```
 
-## Training Configuration
+## Configuration Files
 
-Modify `config/tetris_config.yaml` to adjust:
+### Training Configuration
+
+Modify `config/tetris_config.yaml` to adjust training parameters:
 
 - Learning rate
 - Batch size
@@ -133,6 +158,17 @@ behaviors:
       hidden_units: 512
       num_layers: 3
 ```
+
+### Graphics Mode Configuration
+
+The `data_config.yaml` file contains preset configurations for graphics mode:
+
+- Environment settings
+- Model parameters
+- Visualization options
+- Performance settings
+
+This configuration is automatically loaded by `with_graphics.py` to ensure consistent execution parameters.
 
 ## Monitoring Training
 
@@ -185,6 +221,13 @@ conda env update -f environment.yml --prune
 - Ensure the Unity build runs independently
 - Check that all file paths in main.py are correct
 
+**Graphics mode issues:**
+
+- Verify `data_config.yaml` exists and is properly formatted
+- Ensure graphics drivers are up to date
+- Check that the Unity build supports graphics mode
+- Run `python with_graphics.py` and check console output for specific errors
+
 **Low training performance:**
 
 - Reduce batch size if running out of memory
@@ -198,9 +241,13 @@ conda env update -f environment.yml --prune
 conda env create -f environment.yml
 conda activate ml-unity
 
-# Run the project
+# Run training (headless)
 conda activate ml-unity
 python main.py
+
+# Run with graphics (visualization)
+conda activate ml-unity
+python with_graphics.py
 
 # Monitor training progress (if training mode)
 tensorboard --logdir results/
@@ -208,6 +255,26 @@ tensorboard --logdir results/
 # Update dependencies
 conda env export --from-history > environment.yml
 ```
+
+## Usage Scenarios
+
+### For Training
+
+Use `main.py` when you want to:
+
+- Train new models from scratch
+- Run headless training for performance
+- Generate training data and logs
+- Perform batch training sessions
+
+### For Visualization
+
+Use `with_graphics.py` when you want to:
+
+- Test trained models visually
+- Demonstrate agent performance
+- Debug agent behavior
+- Create presentations or videos
 
 ## Results
 
@@ -223,8 +290,9 @@ Training results, models, and TensorBoard logs are saved in the `results/` direc
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test with the conda environment
-5. Submit a pull request
+4. Test with both training and graphics modes
+5. Update relevant configuration files
+6. Submit a pull request
 
 ## Cleanup
 
