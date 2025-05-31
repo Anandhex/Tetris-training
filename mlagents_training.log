@@ -1,0 +1,30 @@
+2025-05-31 13:48:03,437 - INFO - Training Configuration:
+2025-05-31 13:48:03,437 - INFO -   Config File: data_config.yaml
+2025-05-31 13:48:03,438 - INFO -   Environment: ./builds/mac/tetris.app
+2025-05-31 13:48:03,438 - INFO -   Run ID: tetris_training_1748692083
+2025-05-31 13:48:03,438 - INFO -   Max Steps: 500000
+2025-05-31 13:48:03,438 - INFO -   Use GPU: True
+2025-05-31 13:48:03,438 - INFO -   No Graphics: False
+2025-05-31 13:48:03,438 - INFO - === GPU Configuration ===
+2025-05-31 13:48:03,438 - INFO - No GPU detected, using CPU
+2025-05-31 13:48:03,438 - INFO - Starting ML-Agents training with run ID: tetris_training_1748692083
+2025-05-31 13:48:03,438 - INFO - Using device: CPU
+2025-05-31 13:48:03,456 - INFO - Updated config to use CPU
+2025-05-31 13:48:03,465 - INFO - Forced CPU usage
+2025-05-31 13:48:03,465 - INFO - Running command: mlagents-learn temp_data_config.yaml --run-id tetris_training_1748692083 --env ./builds/mac/tetris.app --train
+2025-05-31 13:48:03,470 - ERROR - Training error: [Errno 2] No such file or directory: 'mlagents-learn'
+2025-05-31 13:48:03,471 - ERROR - Training failed!
+2025-05-31 13:48:28,339 - INFO - Training Configuration:
+2025-05-31 13:48:28,339 - INFO -   Config File: data_config.yaml
+2025-05-31 13:48:28,339 - INFO -   Environment: ./builds/mac/tetris.app
+2025-05-31 13:48:28,339 - INFO -   Run ID: tetris_training_1748692108
+2025-05-31 13:48:28,339 - INFO -   Max Steps: 500000
+2025-05-31 13:48:28,339 - INFO -   Use GPU: True
+2025-05-31 13:48:28,339 - INFO -   No Graphics: False
+2025-05-31 13:48:28,339 - INFO - === GPU Configuration ===
+2025-05-31 13:48:28,339 - INFO - No GPU detected, using CPU
+2025-05-31 13:48:28,340 - INFO - Starting ML-Agents training with run ID: tetris_training_1748692108
+2025-05-31 13:48:28,340 - INFO - Using device: CPU
+2025-05-31 13:48:28,378 - INFO - Updated config to use CPU
+2025-05-31 13:48:28,394 - INFO - Forced CPU usage
+2025-05-31 13:48:28,394 - INFO - Running command: mlagents-learn temp_data_config.yaml --run-id tetris_training_1748692108 --env ./builds/mac/tetris.app --train

@@ -2234,3 +2234,21 @@ More information: https://developers.google.com/protocol-buffers/docs/news/2022-
 2025-05-31 09:12:37,865 - INFO - Starting training for Run GA_Gen1_T1748675557_7848
 2025-05-31 09:12:37,866 - INFO - Forced CPU usage for GA_Gen1_T1748675557_7848
 2025-05-31 09:16:38,314 - INFO - Evolution interrupted by user
+2025-05-31 12:52:33,062 - INFO - === GPU Configuration ===
+2025-05-31 12:52:33,067 - INFO - No GPU detected, using CPU
+2025-05-31 12:52:33,067 - INFO - Starting GA with 20 individuals for 15 generations
+2025-05-31 12:52:33,067 - INFO - Using device: CPU
+2025-05-31 12:52:33,070 - INFO - Generation 1/15
+2025-05-31 12:52:33,376 - INFO - Config GA_Gen0_T1748688753_3399: Using CPU
+2025-05-31 12:52:33,567 - INFO - Starting training for Run GA_Gen0_T1748688753_3399
+2025-05-31 12:52:33,567 - INFO - Forced CPU usage for GA_Gen0_T1748688753_3399
+2025-05-31 13:23:33,917 - INFO - Searching for logs for run_id: GA_Gen0_T1748688753_3399
+2025-05-31 13:23:33,924 - INFO - Found event files in: results/GA_Gen0_T1748688753_3399/TetrisAgent
+2025-05-31 13:23:34,744 - INFO - No path found after results/GA_Gen0_T1748688753_3399/TetrisAgent/events.out.tfevents.1748688767.Anands-MacBook-Air.local.30271.0
+2025-05-31 13:23:34,744 - INFO - Using reward tag: Environment/Cumulative Reward
+2025-05-31 13:23:34,744 - INFO - Found 50 reward values for GA_Gen0_T1748688753_3399
+2025-05-31 13:23:34,746 - INFO - Calculated fitness for GA_Gen0_T1748688753_3399: 2266.8121 (from 10 filtered values)
+2025-05-31 13:23:34,748 - INFO - Training completed for GA_Gen0_T1748688753_3399, fitness: 2266.812145996094
+2025-05-31 13:23:34,872 - INFO - Config GA_Gen0_T1748690614_4655: Using CPU
+2025-05-31 13:23:34,930 - INFO - Starting training for Run GA_Gen0_T1748690614_4655
+2025-05-31 13:23:34,931 - INFO - Forced CPU usage for GA_Gen0_T1748690614_4655
