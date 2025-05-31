@@ -80,3 +80,111 @@ To suppress this check see:
 2025-05-31 16:16:55,693 - WARNING - Using original config file without GPU updates
 2025-05-31 16:16:55,693 - INFO - Forced CPU usage
 2025-05-31 16:16:55,693 - INFO - Running command: mlagents-learn data_config.yaml --run-id tetris_training_1748701015 --env ./builds/mac/tetris.app --train
+2025-05-31 16:18:58,741 - INFO - Training Configuration:
+2025-05-31 16:18:58,741 - INFO -   Config File: data_config.yaml
+2025-05-31 16:18:58,741 - INFO -   Environment: ./builds/windows/tetris/tetris-multi.exe
+2025-05-31 16:18:58,742 - INFO -   Run ID: tetris_training_1748701138
+2025-05-31 16:18:58,742 - INFO -   Max Steps: 500000
+2025-05-31 16:18:58,743 - INFO -   Use GPU: True
+2025-05-31 16:18:58,743 - INFO -   No Graphics: False
+2025-05-31 16:18:58,796 - INFO - === GPU Configuration ===
+2025-05-31 16:18:58,796 - INFO - Found 1 GPU(s):
+2025-05-31 16:18:58,797 - INFO -   GPU 0: NVIDIA GeForce RTX 3050 6GB Laptop GPU
+2025-05-31 16:18:58,797 - INFO - Auto-selected GPU device: 0 (most free memory)
+2025-05-31 16:18:58,797 - INFO - GPU configuration: {'use_gpu': True, 'device': 0, 'device_name': 'cuda:0'}
+2025-05-31 16:18:58,797 - INFO - Starting ML-Agents training with run ID: tetris_training_1748701138
+2025-05-31 16:18:58,797 - INFO - Using device: GPU 0
+2025-05-31 16:18:58,916 - ERROR - Failed to update config: while constructing a mapping
+  in "data_config.yaml", line 35, column 3
+found duplicate key "clearReward" with value "5.0" (original value: "{'curriculum': [{'name': 'single_piece', 'value': 3.0, 'completion_criteria': {'min_lesson_length': 100000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 8.0}}, {'name': 'basic_shapes', 'value': 4.0, 'completion_criteria': {'min_lesson_length': 150000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 12.0}}, {'name': 'simple_shapes', 'value': 5.0, 'completion_criteria': {'min_lesson_length': 200000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 18.0}}, {'name': 'most_shapes', 'value': 6.0, 'completion_criteria': {'min_lesson_length': 250000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 25.0}}, {'name': 'all_shapes', 'value': 7.0, 'completion_criteria': {'min_lesson_length': 300000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 35.0}}]}")
+  in "data_config.yaml", line 378, column 3
+
+To suppress this check see:
+    https://yaml.dev/doc/ruamel.yaml/api/#Duplicate_keys
+
+2025-05-31 16:18:58,916 - WARNING - Using original config file without GPU updates
+2025-05-31 16:18:58,918 - INFO - Set CUDA_VISIBLE_DEVICES=0
+2025-05-31 16:18:58,918 - INFO - Running command: mlagents-learn data_config.yaml --run-id tetris_training_1748701138 --env ./builds/windows/tetris/tetris-multi.exe --torch-device cuda:0 --train
+2025-05-31 16:20:33,210 - INFO - Training interrupted by user
+2025-05-31 16:20:33,211 - ERROR - Training failed!
+2025-05-31 16:35:26,709 - INFO - Training Configuration:
+2025-05-31 16:35:26,709 - INFO -   Config File: data_config.yaml
+2025-05-31 16:35:26,709 - INFO -   Environment: ./builds/windows/tetris/tetris-multi.exe
+2025-05-31 16:35:26,709 - INFO -   Run ID: tetris_training_1748702126
+2025-05-31 16:35:26,709 - INFO -   Max Steps: 500000
+2025-05-31 16:35:26,709 - INFO -   Use GPU: True
+2025-05-31 16:35:26,709 - INFO -   No Graphics: False
+2025-05-31 16:35:27,977 - INFO - === GPU Configuration ===
+2025-05-31 16:35:27,977 - INFO - Found 1 GPU(s):
+2025-05-31 16:35:27,982 - INFO -   GPU 0: NVIDIA GeForce RTX 3050 6GB Laptop GPU
+2025-05-31 16:35:27,982 - INFO - Auto-selected GPU device: 0 (most free memory)
+2025-05-31 16:35:27,982 - INFO - GPU configuration: {'use_gpu': True, 'device': 0, 'device_name': 'cuda:0'}
+2025-05-31 16:35:27,982 - INFO - Starting ML-Agents training with run ID: tetris_training_1748702126
+2025-05-31 16:35:27,982 - INFO - Using device: GPU 0
+2025-05-31 16:35:28,087 - ERROR - Failed to update config: while constructing a mapping
+  in "data_config.yaml", line 35, column 3
+found duplicate key "clearReward" with value "5.0" (original value: "{'curriculum': [{'name': 'single_piece', 'value': 3.0, 'completion_criteria': {'min_lesson_length': 100000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 8.0}}, {'name': 'basic_shapes', 'value': 4.0, 'completion_criteria': {'min_lesson_length': 150000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 12.0}}, {'name': 'simple_shapes', 'value': 5.0, 'completion_criteria': {'min_lesson_length': 200000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 18.0}}, {'name': 'most_shapes', 'value': 6.0, 'completion_criteria': {'min_lesson_length': 250000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 25.0}}, {'name': 'all_shapes', 'value': 7.0, 'completion_criteria': {'min_lesson_length': 300000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 35.0}}]}")
+  in "data_config.yaml", line 378, column 3
+
+To suppress this check see:
+    https://yaml.dev/doc/ruamel.yaml/api/#Duplicate_keys
+
+2025-05-31 16:35:28,089 - WARNING - Using original config file without GPU updates
+2025-05-31 16:35:28,089 - INFO - Set CUDA_VISIBLE_DEVICES=0
+2025-05-31 16:35:28,089 - INFO - Running command: mlagents-learn data_config.yaml --run-id tetris_training_1748702126 --env ./builds/windows/tetris/tetris-multi.exe --torch-device cuda:0 --train
+2025-05-31 16:37:39,747 - INFO - Training interrupted by user
+2025-05-31 16:37:39,747 - ERROR - Training failed!
+2025-05-31 16:40:13,091 - INFO - Training Configuration:
+2025-05-31 16:40:13,092 - INFO -   Config File: data_config.yaml
+2025-05-31 16:40:13,092 - INFO -   Environment: ./builds/windows/tetris/tetris-multi.exe
+2025-05-31 16:40:13,092 - INFO -   Run ID: tetris_training_1748702413
+2025-05-31 16:40:13,093 - INFO -   Max Steps: 500000
+2025-05-31 16:40:13,093 - INFO -   Use GPU: True
+2025-05-31 16:40:13,093 - INFO -   No Graphics: False
+2025-05-31 16:40:14,384 - INFO - === GPU Configuration ===
+2025-05-31 16:40:14,385 - INFO - Found 1 GPU(s):
+2025-05-31 16:40:14,385 - INFO -   GPU 0: NVIDIA GeForce RTX 3050 6GB Laptop GPU
+2025-05-31 16:40:14,385 - INFO - Auto-selected GPU device: 0 (most free memory)
+2025-05-31 16:40:14,385 - INFO - GPU configuration: {'use_gpu': True, 'device': 0, 'device_name': 'cuda:0'}
+2025-05-31 16:40:14,386 - INFO - Starting ML-Agents training with run ID: tetris_training_1748702413
+2025-05-31 16:40:14,386 - INFO - Using device: GPU 0
+2025-05-31 16:40:14,498 - ERROR - Failed to update config: while constructing a mapping
+  in "data_config.yaml", line 35, column 3
+found duplicate key "clearReward" with value "5.0" (original value: "{'curriculum': [{'name': 'single_piece', 'value': 3.0, 'completion_criteria': {'min_lesson_length': 100000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 8.0}}, {'name': 'basic_shapes', 'value': 4.0, 'completion_criteria': {'min_lesson_length': 150000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 12.0}}, {'name': 'simple_shapes', 'value': 5.0, 'completion_criteria': {'min_lesson_length': 200000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 18.0}}, {'name': 'most_shapes', 'value': 6.0, 'completion_criteria': {'min_lesson_length': 250000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 25.0}}, {'name': 'all_shapes', 'value': 7.0, 'completion_criteria': {'min_lesson_length': 300000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 35.0}}]}")
+  in "data_config.yaml", line 378, column 3
+
+To suppress this check see:
+    https://yaml.dev/doc/ruamel.yaml/api/#Duplicate_keys
+
+2025-05-31 16:40:14,500 - WARNING - Using original config file without GPU updates
+2025-05-31 16:40:14,501 - INFO - Set CUDA_VISIBLE_DEVICES=0
+2025-05-31 16:40:14,501 - INFO - Running command: mlagents-learn data_config.yaml --run-id tetris_training_1748702413 --env ./builds/windows/tetris/tetris-multi.exe --torch-device cuda:0 --train
+2025-05-31 16:41:54,942 - INFO - Training interrupted by user
+2025-05-31 16:41:54,942 - ERROR - Training failed!
+2025-05-31 16:43:25,493 - INFO - Training Configuration:
+2025-05-31 16:43:25,493 - INFO -   Config File: data_config.yaml
+2025-05-31 16:43:25,493 - INFO -   Environment: ./builds/windows/tetris/tetris-multi.exe
+2025-05-31 16:43:25,493 - INFO -   Run ID: tetris_training_1748702605
+2025-05-31 16:43:25,493 - INFO -   Max Steps: 500000
+2025-05-31 16:43:25,493 - INFO -   Use GPU: True
+2025-05-31 16:43:25,495 - INFO -   No Graphics: False
+2025-05-31 16:43:26,808 - INFO - === GPU Configuration ===
+2025-05-31 16:43:26,808 - INFO - Found 1 GPU(s):
+2025-05-31 16:43:26,808 - INFO -   GPU 0: NVIDIA GeForce RTX 3050 6GB Laptop GPU
+2025-05-31 16:43:26,808 - INFO - Auto-selected GPU device: 0 (most free memory)
+2025-05-31 16:43:26,808 - INFO - GPU configuration: {'use_gpu': True, 'device': 0, 'device_name': 'cuda:0'}
+2025-05-31 16:43:26,810 - INFO - Starting ML-Agents training with run ID: tetris_training_1748702605
+2025-05-31 16:43:26,810 - INFO - Using device: GPU 0
+2025-05-31 16:43:26,918 - ERROR - Failed to update config: while constructing a mapping
+  in "data_config.yaml", line 35, column 3
+found duplicate key "clearReward" with value "5.0" (original value: "{'curriculum': [{'name': 'single_piece', 'value': 3.0, 'completion_criteria': {'min_lesson_length': 100000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 8.0}}, {'name': 'basic_shapes', 'value': 4.0, 'completion_criteria': {'min_lesson_length': 150000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 12.0}}, {'name': 'simple_shapes', 'value': 5.0, 'completion_criteria': {'min_lesson_length': 200000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 18.0}}, {'name': 'most_shapes', 'value': 6.0, 'completion_criteria': {'min_lesson_length': 250000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 25.0}}, {'name': 'all_shapes', 'value': 7.0, 'completion_criteria': {'min_lesson_length': 300000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 35.0}}]}")
+  in "data_config.yaml", line 378, column 3
+
+To suppress this check see:
+    https://yaml.dev/doc/ruamel.yaml/api/#Duplicate_keys
+
+2025-05-31 16:43:26,919 - WARNING - Using original config file without GPU updates
+2025-05-31 16:43:26,920 - INFO - Set CUDA_VISIBLE_DEVICES=0
+2025-05-31 16:43:26,921 - INFO - Running command: mlagents-learn data_config.yaml --run-id tetris_training_1748702605 --env ./builds/windows/tetris/tetris-multi.exe --torch-device cuda:0 --train
+2025-05-31 16:43:32,422 - ERROR - Training failed with return code: 1
+2025-05-31 16:43:32,425 - ERROR - Training failed!
