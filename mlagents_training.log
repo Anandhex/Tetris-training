@@ -28,3 +28,55 @@
 2025-05-31 13:48:28,378 - INFO - Updated config to use CPU
 2025-05-31 13:48:28,394 - INFO - Forced CPU usage
 2025-05-31 13:48:28,394 - INFO - Running command: mlagents-learn temp_data_config.yaml --run-id tetris_training_1748692108 --env ./builds/mac/tetris.app --train
+2025-05-31 16:02:06,725 - INFO - Training Configuration:
+2025-05-31 16:02:06,725 - INFO -   Config File: data_config.yaml
+2025-05-31 16:02:06,725 - INFO -   Environment: ./builds/mac/tetris.app
+2025-05-31 16:02:06,725 - INFO -   Run ID: tetris_training_1748700126
+2025-05-31 16:02:06,725 - INFO -   Max Steps: 500000
+2025-05-31 16:02:06,725 - INFO -   Use GPU: True
+2025-05-31 16:02:06,725 - INFO -   No Graphics: False
+2025-05-31 16:02:06,725 - INFO - === GPU Configuration ===
+2025-05-31 16:02:06,725 - INFO - No GPU detected, using CPU
+2025-05-31 16:02:06,725 - INFO - Starting ML-Agents training with run ID: tetris_training_1748700126
+2025-05-31 16:02:06,725 - INFO - Using device: CPU
+2025-05-31 16:02:06,761 - INFO - Updated config to use CPU
+2025-05-31 16:02:06,776 - INFO - Forced CPU usage
+2025-05-31 16:02:06,776 - INFO - Running command: mlagents-learn temp_data_config.yaml --run-id tetris_training_1748700126 --env ./builds/mac/tetris.app --train
+2025-05-31 16:16:04,038 - INFO - Training Configuration:
+2025-05-31 16:16:04,038 - INFO -   Config File: data_config.yaml
+2025-05-31 16:16:04,038 - INFO -   Environment: ./builds/mac/tetris.app
+2025-05-31 16:16:04,038 - INFO -   Run ID: tetris_training_1748700964
+2025-05-31 16:16:04,038 - INFO -   Max Steps: 500000
+2025-05-31 16:16:04,038 - INFO -   Use GPU: True
+2025-05-31 16:16:04,038 - INFO -   No Graphics: False
+2025-05-31 16:16:04,038 - INFO - === GPU Configuration ===
+2025-05-31 16:16:04,038 - INFO - No GPU detected, using CPU
+2025-05-31 16:16:04,038 - INFO - Starting ML-Agents training with run ID: tetris_training_1748700964
+2025-05-31 16:16:04,038 - INFO - Using device: CPU
+2025-05-31 16:16:04,092 - INFO - Updated config to use CPU
+2025-05-31 16:16:04,116 - INFO - Forced CPU usage
+2025-05-31 16:16:04,116 - INFO - Running command: mlagents-learn temp_data_config.yaml --run-id tetris_training_1748700964 --env ./builds/mac/tetris.app --train
+2025-05-31 16:16:04,824 - ERROR - Training failed with return code: 1
+2025-05-31 16:16:04,825 - ERROR - Training failed!
+2025-05-31 16:16:55,639 - INFO - Training Configuration:
+2025-05-31 16:16:55,639 - INFO -   Config File: data_config.yaml
+2025-05-31 16:16:55,639 - INFO -   Environment: ./builds/mac/tetris.app
+2025-05-31 16:16:55,639 - INFO -   Run ID: tetris_training_1748701015
+2025-05-31 16:16:55,639 - INFO -   Max Steps: 500000
+2025-05-31 16:16:55,639 - INFO -   Use GPU: True
+2025-05-31 16:16:55,639 - INFO -   No Graphics: False
+2025-05-31 16:16:55,639 - INFO - === GPU Configuration ===
+2025-05-31 16:16:55,639 - INFO - No GPU detected, using CPU
+2025-05-31 16:16:55,639 - INFO - Starting ML-Agents training with run ID: tetris_training_1748701015
+2025-05-31 16:16:55,639 - INFO - Using device: CPU
+2025-05-31 16:16:55,693 - ERROR - Failed to update config: while constructing a mapping
+  in "data_config.yaml", line 35, column 3
+found duplicate key "clearReward" with value "5.0" (original value: "{'curriculum': [{'name': 'single_piece', 'value': 3.0, 'completion_criteria': {'min_lesson_length': 100000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 8.0}}, {'name': 'basic_shapes', 'value': 4.0, 'completion_criteria': {'min_lesson_length': 150000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 12.0}}, {'name': 'simple_shapes', 'value': 5.0, 'completion_criteria': {'min_lesson_length': 200000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 18.0}}, {'name': 'most_shapes', 'value': 6.0, 'completion_criteria': {'min_lesson_length': 250000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 25.0}}, {'name': 'all_shapes', 'value': 7.0, 'completion_criteria': {'min_lesson_length': 300000, 'measure': 'reward', 'behavior': 'TetrisAgent', 'signal_smoothing': True, 'threshold': 35.0}}]}")
+  in "data_config.yaml", line 378, column 3
+
+To suppress this check see:
+    https://yaml.dev/doc/ruamel.yaml/api/#Duplicate_keys
+
+2025-05-31 16:16:55,693 - WARNING - Using original config file without GPU updates
+2025-05-31 16:16:55,693 - INFO - Forced CPU usage
+2025-05-31 16:16:55,693 - INFO - Running command: mlagents-learn data_config.yaml --run-id tetris_training_1748701015 --env ./builds/mac/tetris.app --train
