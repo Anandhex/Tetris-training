@@ -1,305 +1,266 @@
-# Tetris ML-Agents Training
+# Tetris DQN Training Framework
 
-A reinforcement learning project that trains AI agents to play Tetris using Unity ML-Agents toolkit.
+This repository provides a fully configurable pipeline for training Deep Q-Network (DQN) agents (standard, with noise, or greedy) to play a Unity-based Tetris environment. Features include:
 
-## Features
+- **Command-line driven** experiment setup
+- **Cross-platform launcher** (Windows, macOS, Linux)
+- **JSON-based configuration** for rewards, curriculum, and per-run settings
+- **Curriculum learning** support — easy levels up to full game
+- **TensorBoard integration** for metrics and debugging
 
-- Custom Tetris environment built in Unity
-- Reinforcement learning agent training using ML-Agents
-- Cross-platform Unity builds (Windows, macOS, Linux)
-- TensorFlow and PyTorch support for neural networks
-- Configurable training parameters
-- Graphics mode for visualization and testing
+---
 
-## Prerequisites
+## Repository Structure
 
-- [Anaconda](https://www.anaconda.com/products/distribution) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-- Python 3.9
-- Unity 2021.3+ (if modifying the Tetris environment)
+```plaintext
+├── config.json                 # Master configuration (global rewards, instances, unity paths)
+├── train_tetris.py             # Entry-point: loads config & CLI flags, runs training
+├── cross_platform_launcher.py  # Launcher: spins up Unity & trainer instances
+├── improved_tetris_trainer.py  # Core Trainer class with curriculum & reward logic
+├── tetris_client.py            # Unity socket client
+├── dqn_agent.py                # Standard DQN implementation
+├── dqn_agent_with_greedy.py    # Greedy agent implementation
+└── README.md                   # This file
+```
 
-## Setup
+---
 
-### 1. Clone the repository
+## Requirements
+
+- Python 3.8+
+- Unity build of Tetris environment (see `unity_paths` in `config.json`)
+- Python packages:
+  ```bash
+  pip install numpy matplotlib pandas torch tensorboard
+  ```
+
+---
+
+## Configuration (`config.json`)
+
+Defines global settings and per-instance overrides.
+
+```json
+{
+  "unity_paths": {
+    "Windows": "builds/windows/tetris/tetris-multi.exe",
+    "Linux": "builds/linux/tetris.x86_64",
+    "Darwin": "builds/mac/tetris-full-curriculum-dummy.app/Contents/MacOS/tetris-multi"
+  },
+  "host": "127.0.0.1",
+  "log_dir": "logs",
+  "reward_config": {
+    "heuristic_stack_height_coeff": -0.51,
+    "heuristic_line_coeff": 5.0,
+    "heuristic_holes_coeff": -0.36,
+    "heuristic_bumpiness_coeff": -0.18,
+    "shaped_base": 0.2,
+    "shaped_holes_coeff": 0.25,
+    "shaped_bumpiness_coeff": 0.1,
+    "shaped_wells_coeff": 0.1,
+    "height_reward_threshold": 10,
+    "height_reward_multiplier": 0.5,
+    "height_penalty_threshold": 16,
+    "height_penalty_multiplier": 3.0,
+    "normalization_divisor": 50.0,
+    "clip_min": -1.0,
+    "clip_max": 1.0,
+    "lines_multiplier": 75
+  },
+  "instances": [
+    {
+      "name": "run1",
+      "port": 12351,
+      "agent": "dqn",
+      "episodes": 2000,
+      "curriculum": true
+    }
+  ]
+}
+```
+
+- **`unity_paths`**: Map OS to Unity executable path.
+- **`reward_config`**: Global reward parameters tailored to your desired heuristics and shaping. See details below.
+- **`instances`**: Array of runs (name, port, agent type, episodes, curriculum toggle).
+
+---
+
+## Reward Configuration Details
+
+Each key in `reward_config` influences how the agent is rewarded at each step:
+
+| Key                            | Description                                                                                                       |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| `heuristic_stack_height_coeff` | Multiplier for stack height penalty in the heuristic component; negative values penalize tall stacks.             |
+| `heuristic_line_coeff`         | Coefficient for squared lines cleared in the heuristic component; higher rewards for clearing more lines at once. |
+| `heuristic_holes_coeff`        | Multiplier for hole penalty in the heuristic component; negative values discourage creating holes.                |
+| `heuristic_bumpiness_coeff`    | Multiplier for bumpiness penalty in the heuristic component; negative values favor smoother surfaces.             |
+| `shaped_base`                  | Flat base reward added every step.                                                                                |
+| `shaped_holes_coeff`           | Penalty per hole in shaping component; encourages minimizing holes.                                               |
+| `shaped_bumpiness_coeff`       | Penalty per unit bumpiness in shaping component.                                                                  |
+| `shaped_wells_coeff`           | Penalty per unit well depth in shaping component; discourages deep wells.                                         |
+| `height_reward_threshold`      | Stack height below which additional shaped reward is applied.                                                     |
+| `height_reward_multiplier`     | Reward per row under the threshold; encourages keeping stack low.                                                 |
+| `height_penalty_threshold`     | Stack height above which penalty is applied.                                                                      |
+| `height_penalty_multiplier`    | Penalty scaling above the threshold; punishes dangerously tall stacks.                                            |
+| `normalization_divisor`        | Divisor to scale raw reward into a smaller range.                                                                 |
+| `clip_min`                     | Minimum reward after clipping.                                                                                    |
+| `clip_max`                     | Maximum reward after clipping.                                                                                    |
+| `lines_multiplier`             | Additional multiplier for lines cleared in the shaped component; e.g., 75 for strong line incentives.             |
+
+---
+
+## Reward Function Structure
+
+The reward is computed in five stages:
+
+1. **Heuristic Component**  
+   Uses board features and coefficients to estimate quality of a placement:
+   ```text
+   heuristic = (heuristic_stack_height_coeff * stack_height)
+             + (heuristic_line_coeff * lines_cleared^2)
+             + (heuristic_holes_coeff * holes)
+             + (heuristic_bumpiness_coeff * bumpiness)
+   ```
+2. **Score Component**  
+   Direct measure of lines cleared, with optional death penalty:
+   ```text
+   score_comp = lines_cleared^2
+   if game_over: score_comp -= death_penalty
+   ```
+3. **Shaped Component**  
+   Additional shaping to encourage low stacks and penalize holes/wells:
+   ```text
+   shaped = shaped_base
+          + lines_cleared * lines_multiplier
+          - holes * shaped_holes_coeff
+          - bumpiness * shaped_bumpiness_coeff
+   # extra row-based reward/penalty:
+   if stack_height < height_reward_threshold:
+       shaped += (height_reward_threshold - stack_height) * height_reward_multiplier
+   if stack_height > height_penalty_threshold:
+       shaped -= (stack_height - height_penalty_threshold)^2 * height_penalty_multiplier
+   ```
+4. **Blend Heuristic & Score**  
+   Linearly blend heuristic and score components over time:
+   ```text
+   alpha = min(1, step / 10000)
+   raw_reward = (1 - alpha)*heuristic + alpha*score_comp + shaped
+   ```
+5. **Normalization & Clipping**  
+   Scale and clip to a bounded range:
+   ```text
+   normalized = raw_reward / normalization_divisor
+   reward = clip(normalized, clip_min, clip_max)
+   ```
+
+All intermediate values (heuristic, score_comp, shaped, raw_reward, normalized, final reward) are logged to TensorBoard under corresponding tags for debugging and analysis.
+
+--------------------------------|-------------|
+| `heuristic_stack_height_coeff` | Multiplier for stack height penalty in the heuristic component; negative values penalize tall stacks. |
+| `heuristic_line_coeff` | Coefficient for squared lines cleared in the heuristic component; higher rewards for clearing more lines at once. |
+| `heuristic_holes_coeff` | Multiplier for hole penalty in the heuristic component; negative values discourage creating holes. |
+| `heuristic_bumpiness_coeff` | Multiplier for bumpiness penalty in the heuristic component; negative values favor smoother surfaces. |
+| `shaped_base` | Flat base reward added every step. |
+| `shaped_holes_coeff` | Penalty per hole in shaping component; encourages minimizing holes. |
+| `shaped_bumpiness_coeff` | Penalty per unit bumpiness in shaping component. |
+| `shaped_wells_coeff` | Penalty per unit well depth in shaping component; discourages deep wells. |
+| `height_reward_threshold` | Stack height below which additional shaped reward is applied. |
+| `height_reward_multiplier` | Reward per row under the threshold; encourages keeping stack low. |
+| `height_penalty_threshold` | Stack height above which penalty is applied. |
+| `height_penalty_multiplier` | Penalty scaling above the threshold; punishes dangerously tall stacks. |
+| `normalization_divisor` | Divisor to scale raw reward into a smaller range. |
+| `clip_min` | Minimum reward after clipping. |
+| `clip_max` | Maximum reward after clipping. |
+| `lines_multiplier` | Additional multiplier for lines cleared in the shaped component; e.g., 75 for strong line incentives. |
+
+---
+
+## Example Instances
+
+Here are some example `instances` you can run, demonstrating different agents, curriculum settings, and reward overrides:
+
+```json
+[
+  {
+    "name": "baseline_dqn",
+    "port": 12351,
+    "agent": "dqn",
+    "episodes": 1000,
+    "curriculum": true
+  },
+  {
+    "name": "noisy_dqn",
+    "port": 12352,
+    "agent": "dqn_noise",
+    "episodes": 1500,
+    "curriculum": true,
+    "reward_config": {
+      "lines_multiplier": 100,
+      "height_penalty_multiplier": 5.0
+    }
+  },
+  {
+    "name": "greedy_eval",
+    "port": 12353,
+    "agent": "greedy",
+    "episodes": 500,
+    "curriculum": false
+  }
+]
+```
+
+- **`baseline_dqn`**: Standard DQN with default rewards and full curriculum progression.
+- **`noisy_dqn`**: DQN with exploration noise, stronger line reward and harsher height penalty to bias towards low stacks.
+- **`greedy_eval`**: Greedy agent for evaluation; skips curriculum (starts at final stage) and runs fewer episodes.
+
+## Training Workflow
+
+### 1. Launcher (Cross-Platform)
+
+Use `cross_platform_launcher.py` to spin up multiple experiments:
 
 ```bash
-git clone https://github.com/Anandhex/Tetris-training.git
-cd Tetris-training
+python cross_platform_launcher.py config.json
 ```
 
-### 2. Create conda environment
+This will:
+
+1. Read `config.json` and `unity_paths` for your OS.
+2. Merge global + instance reward configs and write per-run `*_config.json`.
+3. Launch each Unity player instance on its specified port.
+4. Launch each Python trainer with `train_tetris.py --config <run_config>`.
+
+Logs are saved under `logs/<instance>_unity.log` and `<instance>_train.log`.
+
+### 2. Direct Training
+
+Alternatively, run a single experiment via `train_tetris.py`:
 
 ```bash
-# Create environment from environment.yml
-conda env create -f environment.yml
-
-# Activate the environment
-conda activate ml-unity
+python train_tetris.py \
+  --config config.json \
+  --host 127.0.0.1 \
+  --port 12351 \
+  --agent dqn \
+  --episodes 2000 \
+  --curriculum
 ```
 
-### 3. Verify installation
+---
+
+## TensorBoard Integration
+
+Metrics and debugging data are logged to the TensorBoard directory (e.g. `runs/tetris_dqn_XXXXXXXX`).
+
+Launch TensorBoard:
 
 ```bash
-# Check if environment is active
-conda info --envs
-
-# Test ML-Agents installation
-python -c "import mlagents; print('ML-Agents installed successfully!')"
-
-# Test other key dependencies
-python -c "import torch, gym; print('PyTorch and Gym installed successfully!')"
+tensorboard --logdir runs
 ```
 
-## Key Dependencies
+---
 
-This environment includes:
+## Contact
 
-- **ML-Agents 0.30.0** - Unity Machine Learning Agents Toolkit
-- **TensorFlow/Keras** - Deep learning framework for neural networks
-- **PyTorch 1.11.0** - Alternative deep learning framework
-- **OpenAI Gym 0.26.2** - Reinforcement learning environment interface
-- **PettingZoo 1.15.0** - Multi-agent reinforcement learning environments
-- **NumPy** - Numerical computing library
-
-## Usage
-
-### Training Mode (Headless)
-
-The `main.py` file handles all the setup and configuration automatically for training:
-
-```bash
-# Always activate the environment first
-conda activate ml-unity
-
-# Run the main script - it handles everything!
-python main.py
-```
-
-### Graphics Mode (Visualization)
-
-Use `with_graphics.py` to run the game with visual interface using preset configurations:
-
-```bash
-# Always activate the environment first
-conda activate ml-unity
-
-# Run with graphics for visualization and testing
-python with_graphics.py
-```
-
-The graphics mode automatically:
-
-- Loads configuration from `data_config.yaml`
-- Runs the Unity build with graphics enabled
-- Provides visual feedback for agent performance
-- Ideal for testing trained models or demonstrations
-
-### Advanced Usage
-
-If the scripts support command-line arguments:
-
-```bash
-# Run training with default settings
-python main.py
-
-# Run graphics mode with default settings
-python with_graphics.py
-```
-
-Both scripts automatically:
-
-- Detect your operating system
-- Select the appropriate Unity build (Windows/Mac/Linux)
-- Set up ML-Agents configuration
-- Handle execution with appropriate settings
-
-## Project Structure
-
-```
-Tetris-training/
-├── environment.yml          # Conda environment configuration
-├── main.py                 # Main training script - handles headless training
-├── with_graphics.py        # Graphics mode script - handles visual execution
-├── config/                 # ML-Agents training configurations
-│   └── various configs
-├── data_config.yaml        # Configuration file for graphics mode
-├── results/                # Training results and tensorboard logs
-├── builds/                 # Unity builds for different platforms
-│   ├── windows/
-│   │   └── /tetris/tetris-multi.exe
-│   ├── mac/
-│   │   └── tetris.app
-│   └── linux/
-│       └── tetris
-└── README.md              # This file
-```
-
-## Configuration Files
-
-### Training Configuration
-
-Modify `config/tetris_config.yaml` to adjust training parameters:
-
-- Learning rate
-- Batch size
-- Network architecture
-- Reward parameters
-- Training duration
-
-Example configuration sections:
-
-```yaml
-behaviors:
-  TetrisAgent:
-    trainer_type: ppo
-    hyperparameters:
-      learning_rate: 3.0e-4
-      batch_size: 1024
-    network_settings:
-      hidden_units: 512
-      num_layers: 3
-```
-
-### Graphics Mode Configuration
-
-The `data_config.yaml` file contains preset configurations for graphics mode:
-
-- Environment settings
-- Model parameters
-- Visualization options
-- Performance settings
-
-This configuration is automatically loaded by `with_graphics.py` to ensure consistent execution parameters.
-
-## Monitoring Training
-
-```bash
-# View training progress with TensorBoard
-tensorboard --logdir results/
-
-# Check training summaries
-mlagents-learn --help
-```
-
-## Development
-
-### Adding New Features
-
-```bash
-# Install additional packages
-conda activate ml-unity
-pip install new_package
-
-# Update environment file
-conda env export --from-history > environment.yml
-```
-
-### Updating the Environment
-
-```bash
-# Update environment from modified environment.yml
-conda env update -f environment.yml --prune
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**Environment creation fails:**
-
-- Update conda: `conda update conda`
-- Try using mamba: `conda install mamba -c conda-forge` then `mamba env create -f environment.yml`
-
-**Unity build not found:**
-
-- Ensure the correct build path for your OS in the training script
-- Check that the Unity build has executable permissions (Linux/macOS)
-
-**Training doesn't start:**
-
-- Run `python main.py` and check console output for specific error messages
-- Verify ML-Agents installation: `python -c "import mlagents"`
-- Ensure the Unity build runs independently
-- Check that all file paths in main.py are correct
-
-**Graphics mode issues:**
-
-- Verify `data_config.yaml` exists and is properly formatted
-- Ensure graphics drivers are up to date
-- Check that the Unity build supports graphics mode
-- Run `python with_graphics.py` and check console output for specific errors
-
-**Low training performance:**
-
-- Reduce batch size if running out of memory
-- Adjust the number of parallel environments
-- Monitor system resources during training
-
-## Quick Commands
-
-```bash
-# Setup (one-time)
-conda env create -f environment.yml
-conda activate ml-unity
-
-# Run training (headless)
-conda activate ml-unity
-python main.py
-
-# Run with graphics (visualization)
-conda activate ml-unity
-python with_graphics.py
-
-# Monitor training progress (if training mode)
-tensorboard --logdir results/
-
-# Update dependencies
-conda env export --from-history > environment.yml
-```
-
-## Usage Scenarios
-
-### For Training
-
-Use `main.py` when you want to:
-
-- Train new models from scratch
-- Run headless training for performance
-- Generate training data and logs
-- Perform batch training sessions
-
-### For Visualization
-
-Use `with_graphics.py` when you want to:
-
-- Test trained models visually
-- Demonstrate agent performance
-- Debug agent behavior
-- Create presentations or videos
-
-## Results
-
-Training results, models, and TensorBoard logs are saved in the `results/` directory. Each training run creates a subdirectory with:
-
-- Trained model files (`.nn` and `.onnx`)
-- Training configuration
-- Performance metrics
-- TensorBoard event files
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test with both training and graphics modes
-5. Update relevant configuration files
-6. Submit a pull request
-
-## Cleanup
-
-```bash
-# Deactivate environment
-conda deactivate
-
-# Remove environment (if needed)
-conda env remove -n ml-unity
-```
+For issues or questions, please open an issue or contact the maintainer.

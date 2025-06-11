@@ -4,3 +4,12 @@
 /results/*
 
 *.log
+/logs/*
+
+/runs/*
+*.pth
+*.csv
+
+__pycache__/
+
+*.app

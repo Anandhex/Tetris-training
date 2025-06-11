@@ -1,0 +1,40 @@
+{
+  "unity_paths": {
+    "Windows": "builds/windows/tetris/tetris-multi.exe",
+    "Linux": "builds/linux/tetris.x86_64",
+    "Darwin": "builds/mac/tetris-full-curriculum-dummy.app/Contents/MacOS/tetris-multi"
+  },
+  "host": "127.0.0.1",
+  "log_dir": "logs",
+  "reward_config": {
+    "heuristic_stack_height_coeff": -0.51,
+    "heuristic_line_coeff": 5.0,
+    "heuristic_holes_coeff": -0.36,
+    "heuristic_bumpiness_coeff": -0.18,
+    "shaped_base": 0.2,
+    "shaped_holes_coeff": 0.25,
+    "shaped_bumpiness_coeff": 0.1,
+    "shaped_wells_coeff": 0.1,
+    "height_reward_threshold": 10,
+    "height_reward_multiplier": 0.5,
+    "height_penalty_threshold": 16,
+    "height_penalty_multiplier": 3.0,
+    "normalization_divisor": 50.0,
+    "clip_min": -1.0,
+    "clip_max": 1.0,
+    "lines_multiplier": 75
+  },
+  "instances": [
+    {
+      "name": "run1",
+      "port": 12351,
+      "agent": "dqn",
+      "reward_line_clear": 1.0,
+      "reward_height": -0.1,
+      "reward_holes": -0.5,
+      "episodes": 2000,
+      "curriculum": true,
+      "reward_config": { "lines_multiplier": 100 }
+    }
+  ]
+}
