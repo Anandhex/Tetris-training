@@ -16,6 +16,25 @@ def main(args):
         sys.exit(1)
 
     reward_config = cfg.get('reward_config', {})
+     # 2) Extract agent-specific parameters
+    agent_params = {}
+    
+    # Get general parameters that apply to all agents
+    general_params = cfg.get('agent_params', {})
+    agent_params.update(general_params)
+    
+    # Get agent-specific parameters based on selected agent
+    if args.agent.startswith('sb3_'):
+        algorithm = args.agent.split('_')[1].lower()  # ppo, dqn, a2c
+        sb3_params = cfg.get('sb3_params', {})
+        
+        # Get algorithm-specific parameters
+        algo_params = sb3_params.get(algorithm, {})
+        agent_params.update(algo_params)
+        
+        # Get common SB3 parameters
+        common_sb3_params = sb3_params.get('common', {})
+        agent_params.update(common_sb3_params)
 
     # 2) Configuration summary
     use_curriculum = args.curriculum and not args.no_curriculum
@@ -28,6 +47,9 @@ def main(args):
     print("  Reward config  =")
     for k, v in reward_config.items():
         print(f"    {k}: {v}")
+    print(" Agent parameters =")
+    for k, v in agent_params.items():
+        print(f"   {k}: {v}")    
     print("--------------------------------------------------")
 
     # 3) Initialize Unity client
@@ -39,6 +61,7 @@ def main(args):
         curriculum=use_curriculum,
         host=args.host,
         port=args.port,
+        **agent_params
     )
 
     # 5) Run training

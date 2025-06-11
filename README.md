@@ -1,10 +1,10 @@
 # Tetris DQN Training Framework
 
-This repository provides a fully configurable pipeline for training Deep Q-Network (DQN) agents (standard, with noise, or greedy) to play a Unity-based Tetris environment. Features include:
+This repository provides a fully configurable pipeline for training Deep Q-Network (DQN) agents (standard, with noise, greedy) and Stable Baselines3 algorithms (PPO, DQN, A2C) to play a Unity-based Tetris environment. Features include:
 
 - **Command-line driven** experiment setup
 - **Cross-platform launcher** (Windows, macOS, Linux)
-- **JSON-based configuration** for rewards, curriculum, and per-run settings
+- **JSON-based configuration** for rewards, curriculum, hyperparameters, and multi-instance setups
 - **Curriculum learning** support — easy levels up to full game
 - **TensorBoard integration** for metrics and debugging
 
@@ -13,13 +13,14 @@ This repository provides a fully configurable pipeline for training Deep Q-Netwo
 ## Repository Structure
 
 ```plaintext
-├── config.json                 # Master configuration (global rewards, instances, unity paths)
+├── config.json                 # Master configuration (global settings, instances, unity paths)
 ├── train_tetris.py             # Entry-point: loads config & CLI flags, runs training
 ├── cross_platform_launcher.py  # Launcher: spins up Unity & trainer instances
 ├── improved_tetris_trainer.py  # Core Trainer class with curriculum & reward logic
 ├── tetris_client.py            # Unity socket client
 ├── dqn_agent.py                # Standard DQN implementation
-├── dqn_agent_with_greedy.py    # Greedy agent implementation
+├── dqn_agent_with_greedy.py    # Greedy and noise-enhanced DQN agents
+├── sb3_agent.py                # Stable Baselines3 agent wrapper (PPO, DQN, A2C)
 └── README.md                   # This file
 ```
 
@@ -30,217 +31,167 @@ This repository provides a fully configurable pipeline for training Deep Q-Netwo
 - Python 3.8+
 - Unity build of Tetris environment (see `unity_paths` in `config.json`)
 - Python packages:
+
   ```bash
-  pip install numpy matplotlib pandas torch tensorboard
+  pip install numpy matplotlib pandas torch tensorboard gymnasium stable-baselines3
   ```
 
 ---
 
 ## Configuration (`config.json`)
 
-Defines global settings and per-instance overrides.
+Defines global settings, per-agent hyperparameters, and one or more training instances. Example structure:
 
-```json
+```jsonc
 {
-  "unity_paths": {
-    "Windows": "builds/windows/tetris/tetris-multi.exe",
-    "Linux": "builds/linux/tetris.x86_64",
-    "Darwin": "builds/mac/tetris-full-curriculum-dummy.app/Contents/MacOS/tetris-multi"
-  },
-  "host": "127.0.0.1",
-  "log_dir": "logs",
-  "reward_config": {
-    "heuristic_stack_height_coeff": -0.51,
-    "heuristic_line_coeff": 5.0,
-    "heuristic_holes_coeff": -0.36,
-    "heuristic_bumpiness_coeff": -0.18,
-    "shaped_base": 0.2,
-    "shaped_holes_coeff": 0.25,
-    "shaped_bumpiness_coeff": 0.1,
-    "shaped_wells_coeff": 0.1,
-    "height_reward_threshold": 10,
-    "height_reward_multiplier": 0.5,
-    "height_penalty_threshold": 16,
-    "height_penalty_multiplier": 3.0,
-    "normalization_divisor": 50.0,
-    "clip_min": -1.0,
-    "clip_max": 1.0,
-    "lines_multiplier": 75
-  },
-  "instances": [
-    {
-      "name": "run1",
-      "port": 12351,
-      "agent": "dqn",
-      "episodes": 2000,
-      "curriculum": true
-    }
-  ]
+  /* ... your JSON config ... */
 }
 ```
 
-- **`unity_paths`**: Map OS to Unity executable path.
-- **`reward_config`**: Global reward parameters tailored to your desired heuristics and shaping. See details below.
-- **`instances`**: Array of runs (name, port, agent type, episodes, curriculum toggle).
+### Configuration Parameters Overview
+
+| Parameter                                    | Section       | Description                                                                                          |
+| -------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------- |
+| `unity_paths`                                | Global        | Maps OS names to Unity executable paths for cross-platform launching.                                |
+| `host`                                       | Global        | Host address for Unity–Python communication socket.                                                  |
+| `log_dir`                                    | Global        | Directory where training and Unity logs are saved.                                                   |
+| `reward_config.heuristic_stack_height_coeff` | Reward Config | Penalizes tall stacks by scaling stack height in heuristic reward component.                         |
+| `reward_config.heuristic_line_coeff`         | Reward Config | Rewards line clears quadratically in heuristic component; higher value emphasizes multi-line clears. |
+| `reward_config.heuristic_holes_coeff`        | Reward Config | Penalizes holes in the stack, encouraging denser, hole-free placements.                              |
+| `reward_config.heuristic_bumpiness_coeff`    | Reward Config | Penalizes surface unevenness to promote flatter top surfaces.                                        |
+| `reward_config.shaped_base`                  | Reward Config | Provides a small constant reward each step to encourage continued play.                              |
+| `reward_config.shaped_holes_coeff`           | Reward Config | Penalty per hole in shaping component to further discourage holes.                                   |
+| `reward_config.shaped_bumpiness_coeff`       | Reward Config | Penalty per unit of bumpiness in shaping component.                                                  |
+| `reward_config.shaped_wells_coeff`           | Reward Config | Penalty for deep wells in the board to avoid tall column gaps.                                       |
+| `reward_config.height_reward_threshold`      | Reward Config | Stack height below which additional bonus is applied.                                                |
+| `reward_config.height_reward_multiplier`     | Reward Config | Bonus per row when stack height is under threshold, incentivizing low stacks.                        |
+| `reward_config.height_penalty_threshold`     | Reward Config | Stack height above which a large penalty begins.                                                     |
+| `reward_config.height_penalty_multiplier`    | Reward Config | Scales penalty quadratically for exceeding safe stack height.                                        |
+| `reward_config.normalization_divisor`        | Reward Config | Divides raw reward to keep values in a stable, bounded range.                                        |
+| `reward_config.clip_min`                     | Reward Config | Minimum reward after clipping to avoid large negative spikes.                                        |
+| `reward_config.clip_max`                     | Reward Config | Maximum reward after clipping to cap positive rewards.                                               |
+| `reward_config.lines_multiplier`             | Reward Config | Multiplier for lines cleared in shaping component to strongly incentivize line clears.               |
+| `agent_params.learning_rate`                 | Agent Params  | Learning rate for native DQN/nuna updates; balances convergence speed vs. stability.                 |
+| `agent_params.batch_size`                    | Agent Params  | Number of samples per training step, affecting gradient variance and compute efficiency.             |
+| `agent_params.gamma`                         | Agent Params  | Discount factor for future rewards; closer to 1 values emphasize long-term planning.                 |
+| `sb3_params.common.verbose`                  | SB3 Params    | Controls verbosity of SB3 training logs.                                                             |
+| `sb3_params.common.device`                   | SB3 Params    | Selects CPU or GPU automatically for faster training.                                                |
+| `sb3_params.common.seed`                     | SB3 Params    | Seed for reproducibility across runs.                                                                |
+| `sb3_params.ppo.learning_rate`               | SB3 PPO       | Policy/value network step size; similar trade-offs as DQN learning_rate.                             |
+| `sb3_params.ppo.n_steps`                     | SB3 PPO       | Number of environment interactions per rollout; affects bias-variance trade-off.                     |
+| `sb3_params.ppo.batch_size`                  | SB3 PPO       | Mini-batch size for PPO updates; larger sizes improve stability but cost more memory.                |
+| `sb3_params.ppo.n_epochs`                    | SB3 PPO       | Number of optimization passes over each rollout; increases sample efficiency.                        |
+| `sb3_params.ppo.gamma`                       | SB3 PPO       | Discount factor for PPO; same role as in DQN.                                                        |
+| `sb3_params.ppo.gae_lambda`                  | SB3 PPO       | GAE smoothing parameter; adjusts bias vs. variance in advantage estimation.                          |
+| `sb3_params.ppo.clip_range`                  | SB3 PPO       | PPO clipping threshold to limit policy updates, enhancing stability.                                 |
+| `sb3_params.ppo.ent_coef`                    | SB3 PPO       | Entropy coefficient to encourage exploration.                                                        |
+| `sb3_params.ppo.vf_coef`                     | SB3 PPO       | Value function loss weight in PPO total loss.                                                        |
+| `sb3_params.ppo.max_grad_norm`               | SB3 PPO       | Gradient clipping threshold for PPO to prevent exploding gradients.                                  |
+| `sb3_params.dqn.learning_rate`               | SB3 DQN       | Learning rate for SB3 DQN Q-network.                                                                 |
+| `sb3_params.dqn.buffer_size`                 | SB3 DQN       | Replay buffer capacity for experience replay stability.                                              |
+| `sb3_params.dqn.learning_starts`             | SB3 DQN       | Number of steps to populate buffer before training begins.                                           |
+| `sb3_params.dqn.batch_size`                  | SB3 DQN       | Samples per replay batch; trade-off between noise and compute.                                       |
+| `sb3_params.dqn.train_freq`                  | SB3 DQN       | Frequency of training vs. acting.                                                                    |
+| `sb3_params.dqn.gradient_steps`              | SB3 DQN       | Number of gradient updates per training call.                                                        |
+| `sb3_params.dqn.target_update_interval`      | SB3 DQN       | Steps between target network updates for stability.                                                  |
+| `sb3_params.dqn.exploration_fraction`        | SB3 DQN       | Portion of training over which epsilon decays.                                                       |
+| `sb3_params.dqn.exploration_initial_eps`     | SB3 DQN       | Starting epsilon for SB3 DQN exploration.                                                            |
+| `sb3_params.dqn.exploration_final_eps`       | SB3 DQN       | Final epsilon after decay completes.                                                                 |
+| `sb3_params.a2c.learning_rate`               | SB3 A2C       | Actor-critic update step size.                                                                       |
+| `sb3_params.a2c.n_steps`                     | SB3 A2C       | Time steps per rollout for A2C; smaller values mean more frequent updates.                           |
+| `sb3_params.a2c.gamma`                       | SB3 A2C       | Discount factor for A2C.                                                                             |
+| `sb3_params.a2c.gae_lambda`                  | SB3 A2C       | GAE lambda for advantage estimation.                                                                 |
+| `sb3_params.a2c.ent_coef`                    | SB3 A2C       | Entropy coefficient to maintain exploration.                                                         |
+| `sb3_params.a2c.vf_coef`                     | SB3 A2C       | Critic loss coefficient.                                                                             |
+| `sb3_params.a2c.max_grad_norm`               | SB3 A2C       | Gradient clipping for A2C training stability.                                                        |
+| `instances[].name`                           | Instances     | Unique identifier for each training run.                                                             |
+| `instances[].port`                           | Instances     | Port for this Unity instance; must be unique to avoid conflicts.                                     |
+| `instances[].agent`                          | Instances     | Agent type to train (`dqn`, `dqn_noise`, `greedy`, `nuna`, `sb3_ppo`, `sb3_dqn`, `sb3_a2c`).         |
+| `instances[].episodes`                       | Instances     | Number of episodes to train for this run.                                                            |
+| `instances[].curriculum`                     | Instances     | Toggle curriculum learning on/off for this specific run.                                             |
+| `instances[].reward_config`                  | Instances     | Partial overrides of global reward_config for custom shaping per instance.                           |
+
+````
+
+> **Note:** Per-instance overrides can replace or extend any of `host`, `port`, `reward_config`, `agent_params`, or `sb3_params.common`.
 
 ---
 
-## Reward Configuration Details
+## Why the Reward Configuration Differs
 
-Each key in `reward_config` influences how the agent is rewarded at each step:
+Over time, we refined the reward function to address several key challenges:
 
-| Key                            | Description                                                                                                       |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `heuristic_stack_height_coeff` | Multiplier for stack height penalty in the heuristic component; negative values penalize tall stacks.             |
-| `heuristic_line_coeff`         | Coefficient for squared lines cleared in the heuristic component; higher rewards for clearing more lines at once. |
-| `heuristic_holes_coeff`        | Multiplier for hole penalty in the heuristic component; negative values discourage creating holes.                |
-| `heuristic_bumpiness_coeff`    | Multiplier for bumpiness penalty in the heuristic component; negative values favor smoother surfaces.             |
-| `shaped_base`                  | Flat base reward added every step.                                                                                |
-| `shaped_holes_coeff`           | Penalty per hole in shaping component; encourages minimizing holes.                                               |
-| `shaped_bumpiness_coeff`       | Penalty per unit bumpiness in shaping component.                                                                  |
-| `shaped_wells_coeff`           | Penalty per unit well depth in shaping component; discourages deep wells.                                         |
-| `height_reward_threshold`      | Stack height below which additional shaped reward is applied.                                                     |
-| `height_reward_multiplier`     | Reward per row under the threshold; encourages keeping stack low.                                                 |
-| `height_penalty_threshold`     | Stack height above which penalty is applied.                                                                      |
-| `height_penalty_multiplier`    | Penalty scaling above the threshold; punishes dangerously tall stacks.                                            |
-| `normalization_divisor`        | Divisor to scale raw reward into a smaller range.                                                                 |
-| `clip_min`                     | Minimum reward after clipping.                                                                                    |
-| `clip_max`                     | Maximum reward after clipping.                                                                                    |
-| `lines_multiplier`             | Additional multiplier for lines cleared in the shaped component; e.g., 75 for strong line incentives.             |
+- **Sparse vs. Shaped Signals**:  A simple `lines_cleared^2` reward is too sparse and causes slow learning. By adding a constant `shaped_base` and per-move shaping components (holes, bumpiness, wells), the agent receives more frequent feedback to guide its policy earlier in training.
+
+- **Balancing Long-Term vs. Short-Term**:  Blending a heuristic estimate (`heuristic_*` terms) with the actual score-based component over the first 10,000 steps (via the `alpha` blend) helps the agent bootstrap from domain knowledge before relying entirely on learned rewards.
+
+- **Stable Magnitudes**:  Without normalization & clipping (`normalization_divisor`, `clip_min`, `clip_max`), raw rewards can explode or vanish, destabilizing training. These parameters keep the reward in a bounded range for reliable gradient updates.
+
+- **Encouraging Risk Management**:  Height-based bonuses and penalties (`height_reward_*`, `height_penalty_*`) explicitly teach the agent to keep stacks low—an essential skill in Tetris that pure line-based rewards do not capture.
+
+Together, these changes yield smoother, faster convergence and more human-like stacking behavior.
 
 ---
 
 ## Reward Function Structure
 
-The reward is computed in five stages:
+1. **Heuristic Component**
+   \[h\] = *h_sh*⋅stack_height
+   &nbsp;&nbsp;+ *h_l*⋅(lines_cleared²)
+   &nbsp;&nbsp;+ *h_h*⋅holes
+   &nbsp;&nbsp;+ *h_b*⋅bumpiness
 
-1. **Heuristic Component**  
-   Uses board features and coefficients to estimate quality of a placement:
-   ```text
-   heuristic = (heuristic_stack_height_coeff * stack_height)
-             + (heuristic_line_coeff * lines_cleared^2)
-             + (heuristic_holes_coeff * holes)
-             + (heuristic_bumpiness_coeff * bumpiness)
-   ```
-2. **Score Component**  
-   Direct measure of lines cleared, with optional death penalty:
-   ```text
-   score_comp = lines_cleared^2
-   if game_over: score_comp -= death_penalty
-   ```
-3. **Shaped Component**  
-   Additional shaping to encourage low stacks and penalize holes/wells:
-   ```text
-   shaped = shaped_base
-          + lines_cleared * lines_multiplier
-          - holes * shaped_holes_coeff
-          - bumpiness * shaped_bumpiness_coeff
-   # extra row-based reward/penalty:
-   if stack_height < height_reward_threshold:
-       shaped += (height_reward_threshold - stack_height) * height_reward_multiplier
-   if stack_height > height_penalty_threshold:
-       shaped -= (stack_height - height_penalty_threshold)^2 * height_penalty_multiplier
-   ```
-4. **Blend Heuristic & Score**  
-   Linearly blend heuristic and score components over time:
-   ```text
-   alpha = min(1, step / 10000)
-   raw_reward = (1 - alpha)*heuristic + alpha*score_comp + shaped
-   ```
-5. **Normalization & Clipping**  
-   Scale and clip to a bounded range:
-   ```text
-   normalized = raw_reward / normalization_divisor
-   reward = clip(normalized, clip_min, clip_max)
-   ```
+2. **Score Component**
+   score_comp = lines_cleared² (– death_penalty if game over)
 
-All intermediate values (heuristic, score_comp, shaped, raw_reward, normalized, final reward) are logged to TensorBoard under corresponding tags for debugging and analysis.
+3. **Shaped Component**
+   shaped = base + lines⋅lines_multiplier – holes⋅sh_h – bumpiness⋅sh_b – wells⋅sh_w
+   + bonus/penalty for stack height under/over thresholds
 
-## Example Instances
+4. **Blend**
+   α = min(1, step / 10000)
+   raw = (1–α)⋅h + α⋅score_comp + shaped
 
-Here are some example `instances` you can run, demonstrating different agents, curriculum settings, and reward overrides:
+5. **Normalize & Clip**
+   reward = clip(raw / normalization_divisor, clip_min, clip_max)
 
-```json
-[
-  {
-    "name": "baseline_dqn",
-    "port": 12351,
-    "agent": "dqn",
-    "episodes": 1000,
-    "curriculum": true
-  },
-  {
-    "name": "noisy_dqn",
-    "port": 12352,
-    "agent": "dqn_noise",
-    "episodes": 1500,
-    "curriculum": true,
-    "reward_config": {
-      "lines_multiplier": 100,
-      "height_penalty_multiplier": 5.0
-    }
-  },
-  {
-    "name": "greedy_eval",
-    "port": 12353,
-    "agent": "greedy",
-    "episodes": 500,
-    "curriculum": false
-  }
-]
-```
-
-- **`baseline_dqn`**: Standard DQN with default rewards and full curriculum progression.
-- **`noisy_dqn`**: DQN with exploration noise, stronger line reward and harsher height penalty to bias towards low stacks.
-- **`greedy_eval`**: Greedy agent for evaluation; skips curriculum (starts at final stage) and runs fewer episodes.
-
-## Training Workflow
-
-### 1. Launcher (Cross-Platform)
-
-Use `cross_platform_launcher.py` to spin up multiple experiments:
-
-```bash
-python cross_platform_launcher.py config.json
-```
-
-This will:
-
-1. Read `config.json` and `unity_paths` for your OS.
-2. Merge global + instance reward configs and write per-run `*_config.json`.
-3. Launch each Unity player instance on its specified port.
-4. Launch each Python trainer with `train_tetris.py --config <run_config>`.
-
-Logs are saved under `logs/<instance>_unity.log` and `<instance>_train.log`.
-
-### 2. Direct Training
-
-Alternatively, run a single experiment via `train_tetris.py`:
-
-```bash
-python train_tetris.py \
-  --config config.json \
-  --host 127.0.0.1 \
-  --port 12351 \
-  --agent dqn \
-  --episodes 2000 \
-  --curriculum
-```
+_All intermediate values are logged to TensorBoard under `debug/*` and `reward/*` tags._
 
 ---
 
-## TensorBoard Integration
+## Running Experiments
 
-Metrics and debugging data are logged to the TensorBoard directory (e.g. `runs/tetris_dqn_XXXXXXXX`).
+### Cross-Platform Launcher
 
-Launch TensorBoard:
+```bash
+python cross_platform_launcher.py config.json
+````
+
+- Reads `unity_paths` to start Unity builds
+- Generates per-instance JSON by merging globals + overrides
+- Launches Unity and Python trainers for each `instances` entry
+- Logs to `log_dir/<instance>_unity.log` and `log_dir/<instance>_train.log`
+
+### Single Run (Direct)
+
+```bash
+python train_tetris.py --config config.json --instance baseline_dqn
+```
+
+_(Assumes you extend `train_tetris.py` to accept an `--instance` flag that picks one of the named runs.)_
+
+---
+
+## Monitoring via TensorBoard
 
 ```bash
 tensorboard --logdir runs
 ```
 
+Metrics include per-episode score, reward breakdowns, feature counts, and curriculum progress.
+
 ---
 
 ## Contact
 
-For issues or questions, please open an issue or contact the maintainer.
+For issues or enhancements, please open an issue or reach out to the maintainer.

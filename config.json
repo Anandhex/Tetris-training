@@ -24,6 +24,63 @@
     "clip_max": 1.0,
     "lines_multiplier": 75
   },
+  "agent_params": {
+    "learning_rate": 3e-4,
+    "gamma": 0.99
+  },
+
+  "sb3_params": {
+    "common": {
+      "verbose": 1,
+      "device": "auto",
+      "seed": 42
+    },
+    "ppo": {
+      "learning_rate": 3e-4,
+      "n_steps": 2048,
+      "batch_size": 64,
+      "n_epochs": 10,
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "clip_range": 0.2,
+      "clip_range_vf": null,
+      "ent_coef": 0.01,
+      "vf_coef": 0.5,
+      "max_grad_norm": 0.5,
+      "use_sde": false,
+      "sde_sample_freq": -1,
+      "target_kl": null
+    },
+    "dqn": {
+      "learning_rate": 1e-4,
+      "buffer_size": 100000,
+      "learning_starts": 50000,
+      "batch_size": 32,
+      "tau": 1.0,
+      "gamma": 0.99,
+      "train_freq": 4,
+      "gradient_steps": 1,
+      "target_update_interval": 10000,
+      "exploration_fraction": 0.1,
+      "exploration_initial_eps": 1.0,
+      "exploration_final_eps": 0.05,
+      "max_grad_norm": 10
+    },
+    "a2c": {
+      "learning_rate": 7e-4,
+      "n_steps": 5,
+      "gamma": 0.99,
+      "gae_lambda": 1.0,
+      "ent_coef": 0.0,
+      "vf_coef": 0.25,
+      "max_grad_norm": 0.5,
+      "rms_prop_eps": 1e-5,
+      "use_rms_prop": true,
+      "use_sde": false,
+      "sde_sample_freq": -1,
+      "normalize_advantage": false
+    }
+  },
   "instances": [
     {
       "name": "nuna",
