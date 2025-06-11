@@ -35,6 +35,17 @@
       "episodes": 2000,
       "curriculum": true,
       "reward_config": { "lines_multiplier": 100 }
+    },
+    {
+      "name": "greedy",
+      "port": 12399,
+      "agent": "dqn",
+      "reward_line_clear": 1.0,
+      "reward_height": -0.1,
+      "reward_holes": -0.5,
+      "episodes": 2000,
+      "curriculum": true,
+      "reward_config": { "lines_multiplier": 100 }
     }
   ]
 }

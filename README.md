@@ -156,26 +156,6 @@ The reward is computed in five stages:
 
 All intermediate values (heuristic, score_comp, shaped, raw_reward, normalized, final reward) are logged to TensorBoard under corresponding tags for debugging and analysis.
 
---------------------------------|-------------|
-| `heuristic_stack_height_coeff` | Multiplier for stack height penalty in the heuristic component; negative values penalize tall stacks. |
-| `heuristic_line_coeff` | Coefficient for squared lines cleared in the heuristic component; higher rewards for clearing more lines at once. |
-| `heuristic_holes_coeff` | Multiplier for hole penalty in the heuristic component; negative values discourage creating holes. |
-| `heuristic_bumpiness_coeff` | Multiplier for bumpiness penalty in the heuristic component; negative values favor smoother surfaces. |
-| `shaped_base` | Flat base reward added every step. |
-| `shaped_holes_coeff` | Penalty per hole in shaping component; encourages minimizing holes. |
-| `shaped_bumpiness_coeff` | Penalty per unit bumpiness in shaping component. |
-| `shaped_wells_coeff` | Penalty per unit well depth in shaping component; discourages deep wells. |
-| `height_reward_threshold` | Stack height below which additional shaped reward is applied. |
-| `height_reward_multiplier` | Reward per row under the threshold; encourages keeping stack low. |
-| `height_penalty_threshold` | Stack height above which penalty is applied. |
-| `height_penalty_multiplier` | Penalty scaling above the threshold; punishes dangerously tall stacks. |
-| `normalization_divisor` | Divisor to scale raw reward into a smaller range. |
-| `clip_min` | Minimum reward after clipping. |
-| `clip_max` | Maximum reward after clipping. |
-| `lines_multiplier` | Additional multiplier for lines cleared in the shaped component; e.g., 75 for strong line incentives. |
-
----
-
 ## Example Instances
 
 Here are some example `instances` you can run, demonstrating different agents, curriculum settings, and reward overrides:
