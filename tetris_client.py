@@ -99,11 +99,11 @@ class UnityTetrisClient:
                 self.receive_thread.daemon = True
                 self.receive_thread.start()
                 
-                print(f"✓ Connected to Unity at {self.host}:{self.port}")
+                print(f" Connected to Unity at {self.host}:{self.port}")
                 return True
                 
             except Exception as e:
-                print(f"✗ Connection failed: {e}")
+                print(f" Connection failed: {e}")
                 if attempt < max_retries - 1:
                     time.sleep(retry_delay)
                 
