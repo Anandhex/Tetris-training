@@ -327,7 +327,7 @@ class DQNAgent:
 
         valid_actions = state['validActions']
         if not valid_actions:
-            print("❌ No valid actions available — returning fallback or skipping step.")
+            print(" No valid actions available — returning fallback or skipping step.")
             return 0
 
 

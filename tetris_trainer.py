@@ -248,7 +248,7 @@ class TetrisTrainer:
         
         # Advance after 3 consecutive episodes hitting the threshold
         if self.consecutive_good_episodes >= current_stage['consecutive_required']:
-            print(f"\n🎯 ADVANCING CURRICULUM! Episode {episode}, Score: {episode_score} >= {threshold}")
+            print(f"\n ADVANCING CURRICULUM! Episode {episode}, Score: {episode_score} >= {threshold}")
             return True
         
         return False
@@ -277,7 +277,7 @@ class TetrisTrainer:
             return True  # No change needed, connection is fine
         
         stage = self.curriculum_stages[self.current_curriculum_stage]
-        print(f"🚀 New Stage: {stage['name']} - Height: {stage['height']}, Pieces: {stage['pieces']}")
+        print(f" New Stage: {stage['name']} - Height: {stage['height']}, Pieces: {stage['pieces']}")
         
         # Try curriculum change with connection recovery
         max_retries = 3
@@ -303,17 +303,17 @@ class TetrisTrainer:
                     # Test connection by waiting for game ready
                     test_state = self.client.wait_for_game_ready(timeout=10.0)
                     if test_state is not None:
-                        print(f"✅ Curriculum change successful on attempt {attempt + 1}")
+                        print(f" Curriculum change successful on attempt {attempt + 1}")
                         return True
                 
-                print(f"⚠️ Curriculum change failed, attempt {attempt + 1}/{max_retries}")
+                print(f" Curriculum change failed, attempt {attempt + 1}/{max_retries}")
                 
             except Exception as e:
-                print(f"❌ Connection error during curriculum change: {e}")
+                print(f" Connection error during curriculum change: {e}")
             
             # Reconnect if not the last attempt
             if attempt < max_retries - 1:
-                print("🔄 Reconnecting to Unity...")
+                print(" Reconnecting to Unity...")
                 self.client.disconnect()
                 import time
                 time.sleep(3.0)  # Give Unity more time to reset
@@ -327,11 +327,11 @@ class TetrisTrainer:
                     time.sleep(2.0)
                 
                 if not reconnect_success:
-                    print(f"❌ Reconnection failed on attempt {attempt + 1}")
+                    print(f" Reconnection failed on attempt {attempt + 1}")
                     continue
-                print("✅ Reconnected successfully")
+                print(" Reconnected successfully")
         
-        print("❌ Failed to apply curriculum change after all retries")
+        print(" Failed to apply curriculum change after all retries")
         return False
 
     def ensure_connection_ready(self):
@@ -344,7 +344,7 @@ class TetrisTrainer:
                 if state is not None:
                     return state
                 
-                print(f"⚠️ No initial state, attempt {attempt + 1}/{max_attempts}")
+                print(f" No initial state, attempt {attempt + 1}/{max_attempts}")
                 
                 # Try reset
                 self.client.send_reset()
@@ -352,7 +352,7 @@ class TetrisTrainer:
                 time.sleep(2.0)
                 
             except Exception as e:
-                print(f"❌ Connection issue: {e}")
+                print(f" Connection issue: {e}")
                 
                 # Reconnect if not last attempt
                 if attempt < max_attempts - 1:
@@ -460,7 +460,7 @@ class TetrisTrainer:
                     connection_ok = self.apply_curriculum_with_reconnect(episode, prev_episode_score)
                 
                 if not connection_ok:
-                    print("⚠️ Curriculum change failed, but continuing...")
+                    print(" Curriculum change failed, but continuing...")
                 
                 # Enhanced episode logging
                 if episode % 1 == 0:
@@ -549,7 +549,7 @@ class TetrisTrainer:
                 if episode_score > self.best_score:
                     self.best_score = episode_score
                     self.save_model(f"best_model_score_{episode_score}.pth")
-                    print(f"🏆 New best score: {episode_score}!")
+                    print(f" New best score: {episode_score}!")
                 
                 # Regular saves and evaluation
                 if episode % save_interval == 0 and episode > 0:
@@ -691,7 +691,7 @@ class TetrisTrainer:
             self.agent.writer.add_scalar('Evaluation/Score_Std', std_score, eval_episode)
             
             current_stage = self.curriculum_stages[self.current_curriculum_stage]
-            print(f"\n📊 Evaluation Results (Stage: {current_stage['name']}):")
+            print(f"\ Evaluation Results (Stage: {current_stage['name']}):")
             print(f"Average Score: {avg_score:.2f} ± {std_score:.2f}")
             print(f"Average Lines: {avg_lines:.2f}")
             print(f"Average Reward: {avg_reward:.2f}")
@@ -700,6 +700,6 @@ class TetrisTrainer:
             
             # Check if evaluation performance suggests readiness for advancement
             if avg_score > current_stage['advancement_threshold']:
-                print(f"🎯 Evaluation suggests readiness for curriculum advancement!")
+                print(f" Evaluation suggests readiness for curriculum advancement!")
         
         return eval_scores, eval_lines, eval_rewards
