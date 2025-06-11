@@ -68,7 +68,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--agent",
-        choices=["dqn", "dqn_noise", "greedy"],
+        choices=["dqn", "dqn_noise", "greedy",'sb3_ppo', 'sb3_dqn', 'sb3_a2c',"nuna"],
         default="dqn",
         help="Which agent to use"
     )

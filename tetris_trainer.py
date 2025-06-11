@@ -9,6 +9,7 @@ import os
 from tetris_client import UnityTetrisClient
 from dqn_agent import DQNAgent
 from dqn_agent_with_greedy import DQNAgentGreedy
+from nuno import EnhancedDQNAgent
 import torch
 from collections import Counter
 from collections import deque
@@ -16,14 +17,15 @@ from collections import deque
 class TetrisTrainer:
     def __init__(
         self,
-        agent_type: str = 'dqn',           # 'dqn', 'dqn_noise', or 'greedy'
+        agent_type: str = 'dqn',            # 'dqn', 'dqn_noise', 'greedy', 'sb3_ppo', 'sb3_dqn', 'sb3_a2c'
         load_model: bool = False,
         model_path: str = 'tetris_model.pth',
         tensorboard_log_dir: str = None,
         reward_config: dict = None,
         score_window_size: int = 100,
         curriculum: bool = True, 
-        host='127.0.0.1', port=12348
+        host='127.0.0.1', port=12348,
+         **agent_kwargs 
     ):
         # Connection to Unity
         self.client = UnityTetrisClient(host,port)
@@ -35,7 +37,7 @@ class TetrisTrainer:
         # Prepare TensorBoard directory
         if tensorboard_log_dir is None:
             tensorboard_log_dir = f"runs/tetris_{agent_type}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-
+        self.is_sb3_agent = False
         # --- Agent factory ---
         if agent_type == 'dqn':
             # Standard DQN
@@ -46,6 +48,26 @@ class TetrisTrainer:
         elif agent_type == 'greedy':
             # Greedy rollout agent
             self.agent = DQNAgentGreedy(state_size=208, tensorboard_log_dir=tensorboard_log_dir)
+        elif agent_type == "nuna":
+            self.agent = EnhancedDQNAgent(tensorboard_log_dir=tensorboard_log_dir)
+        elif agent_type.startswith('sb3_'):
+        # Stable Baselines3 agents
+            from sb3_agent import StableBaselinesAgent
+            
+            algorithm = agent_type.split('_')[1].upper()  # Extract algorithm (PPO, DQN, A2C)
+            
+            self.agent = StableBaselinesAgent(
+                client=self.client,
+                reward_calculator=self.calculate_reward,
+                algorithm=algorithm,
+                state_size=222,
+                tensorboard_log_dir=tensorboard_log_dir,
+                **agent_kwargs
+            )
+            
+            # Set SB3 specific attributes
+            self.is_sb3_agent = True
+            self.sb3_training_timesteps = 0    
         else:
             raise ValueError(f"Unknown agent_type '{agent_type}'. Must be one of 'dqn','dqn_noise','greedy'")
 
@@ -139,7 +161,7 @@ class TetrisTrainer:
         if not self.curriculum:
             self.current_curriculum_stage = len(self.curriculum_stages) - 1
 
-       
+        print(self.current_curriculum_stage)
 
         # Dimensions
         self.BOARD_HEIGHT = 20
@@ -428,9 +450,55 @@ class TetrisTrainer:
         writer.add_scalar('reward/blend_alpha', alpha,     step)
 
         return reward
+    
+    def train_sb3(self, total_timesteps=100000, save_interval=10000):
+        """Training method specifically for SB3 agents"""
+        if not self.is_sb3_agent:
+            raise ValueError("train_sb3 can only be used with SB3 agents")
+        
+        if not self.client.connect():
+            print("Failed to connect to Unity. Make sure Unity is running!")
+            return
+        
+        print(f"Starting SB3 training with {self.agent.algorithm}...")
+        print(f"Total timesteps: {total_timesteps}")
+        
+        try:
+            # Initialize curriculum if enabled
+            if self.curriculum:
+                stage = self.curriculum_stages[self.current_curriculum_stage]
+                self.client.send_curriculum_change(
+                    board_height=stage['height'],
+                    board_preset=stage['preset'],
+                    tetromino_types=stage['pieces'],
+                    stage_name=stage['name']
+                )
+            
+            # Train the model
+            self.agent.learn(total_timesteps=total_timesteps)
+            
+            # Save the model
+            self.save_model()
+            print("SB3 Training completed!")
+            
+        except KeyboardInterrupt:
+            print("\nTraining interrupted by user")
+            self.save_model()
+        except Exception as e:
+            print(f"Training error: {e}")
+            import traceback
+            traceback.print_exc()
+        finally:
+            self.agent.close()
+            self.client.disconnect()
+
 
     def train(self, episodes=sys.maxsize, save_interval=100, eval_interval=200):
         """Main training loop with enhanced curriculum management"""
+        if self.is_sb3_agent:
+            total_timesteps = episodes * 400  # Rough estimate: episodes * average steps per episode
+            return self.train_sb3(total_timesteps=total_timesteps, save_interval=save_interval)
+        
         if not self.client.connect():
             print("Failed to connect to Unity. Make sure Unity is running!")
             return
@@ -442,8 +510,8 @@ class TetrisTrainer:
         hparams = {
             'lr': self.agent.learning_rate,
             'batch_size': self.agent.batch_size,
-            'target_update_freq': self.agent.target_update_freq,
-            'memory_size': self.agent.memory.maxlen,
+            'target_update_freq': self.agent.target_update_freq ,
+            'memory_size': self.agent.memory.maxlen or 0,
         }
         self.agent.writer.add_hparams(hparams, {'hparam/placeholder': 0})
         print(f"Memory size: {len(self.agent.memory)}, Batch size: {self.agent.batch_size}")

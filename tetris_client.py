@@ -143,7 +143,7 @@ class UnityTetrisClient:
         
         command = {
             "type": "action",
-            "action": {"actionIndex": action_index}
+            "action": {"actionIndex": int(action_index)}
         }
         
         return self._send_command(command)
