@@ -1,600 +1,544 @@
 import numpy as np
 import random
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
+import logging
 from collections import deque
-import matplotlib.pyplot as plt
-from enum import Enum
-import copy
+import onnxruntime as ort
+from tensorflow.keras.models import load_model, Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import Adam
 
-class PowerUpType(Enum):
-    BOTTOM_LINE_CLEAR = 0
-    GRAVITY = 1
-    BOMB = 2
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('tetris_debug.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger('TetrisAI')
 
-class TetrisBoard:
+class Tetris:
+    SHAPES = [
+        [[1, 1, 1, 1]],  # I
+        [[1, 1], [1, 1]],  # O
+        [[0, 1, 0], [1, 1, 1]],  # T
+        [[1, 1, 0], [0, 1, 1]],  # S
+        [[0, 1, 1], [1, 1, 0]],  # Z
+        [[1, 0, 0], [1, 1, 1]],  # J
+        [[0, 0, 1], [1, 1, 1]]   # L
+    ]
+    
     def __init__(self, width=10, height=20):
         self.width = width
         self.height = height
-        self.board = np.zeros((height, width), dtype=int)
-        self.score = 0
-        self.lines_cleared = 0
-        self.current_piece = None
+        self.reset()
+        logger.debug(f"Initialized Tetris board {width}x{height}")
+        
+    def reset(self):
+        self.board = np.zeros((self.height, self.width), dtype=int)
+        self.block_count = 0
+        self.current_powerup = None
+        self.last_placement = None
         self.game_over = False
-        self.pieces_placed = 0
-        
-        # Simplified Tetris pieces
-        self.pieces = [
-            np.array([[1, 1, 1, 1]]),  # I
-            np.array([[1, 1], [1, 1]]),  # O
-            np.array([[0, 1, 0], [1, 1, 1]]),  # T
-            np.array([[1, 1, 0], [0, 1, 1]]),  # S
-            np.array([[0, 1, 1], [1, 1, 0]]),  # Z
-            np.array([[1, 0, 0], [1, 1, 1]]),  # J
-            np.array([[0, 0, 1], [1, 1, 1]]),  # L
-        ]
-        
-        self.piece_position = (0, 0)
-        self.spawn_new_piece()
-        
-        # Create some initial blocks for testing powerups
-        self.create_initial_blocks()
+        self.score = 0
+        self._new_block()
+        logger.debug("Game reset")
+        return self.get_state()
     
-    def create_initial_blocks(self):
-        """Create some initial blocks to make powerups more effective"""
-        # Add some scattered blocks
-        for _ in range(10):
-            x = random.randint(0, self.width - 1)
-            y = random.randint(self.height - 8, self.height - 1)
-            self.board[y, x] = 1
+    def _new_block(self):
+        self.current_block = random.choice(self.SHAPES)
+        self.block_pos = [0, self.width // 2 - len(self.current_block[0]) // 2]
+        logger.debug(f"New block generated: {self.current_block}")
         
-        # Add some holes
-        for _ in range(3):
-            x = random.randint(0, self.width - 1)
-            y = random.randint(self.height - 5, self.height - 1)
-            self.board[y, x] = 0
-        
-        # DEBUG: Print initial board
-        print("\nINITIAL BOARD STATE:")
-        for row in self.board:
-            print(' '.join('X' if cell else '.' for cell in row))
-        print(f"Density: {np.sum(self.board)/(self.width*self.height):.2f}")
+    def get_state(self):
+        powerup_vec = np.zeros(3)
+        if self.current_powerup == 'bottom_clear':
+            powerup_vec[0] = 1
+        elif self.current_powerup == 'gravity':
+            powerup_vec[1] = 1
+        elif self.current_powerup == 'bomb':
+            powerup_vec[2] = 1
+        return self.board.copy(), powerup_vec
     
-    def spawn_new_piece(self):
-        """Spawn a new piece at the top"""
-        self.current_piece = random.choice(self.pieces)
-        self.piece_position = (0, self.width // 2 - 1)
+    def place_block(self, placement_model, model_type='keras'):
+        if self.game_over:
+            logger.debug("Game over. Cannot place block.")
+            return 0, True
+            
+        best_score = -float('inf')
+        best_action = None
         
-        # Check if game over
-        if self.check_collision(self.current_piece, self.piece_position):
+        # Store features and corresponding actions to pass to the model
+        all_features = []
+        possible_actions = [] # (block, original_block_pos, rot, x)
+        
+        logger.debug(f"Evaluating placements for block: {self.current_block}")
+        
+        for rot in range(4):
+            block = np.rot90(self.current_block, k=rot)
+            block_width = len(block[0])
+            
+            # Simulate hard drop to find the final y position for each x
+            for x in range(self.width - block_width + 1):
+                test_pos_initial = [0, x] # Start at top
+                
+                # Simulate dropping the block
+                sim_board_temp = self.board.copy() # Board for collision check during drop
+                current_drop_y = 0
+                
+                # Find the lowest valid y position
+                while not self._check_collision(block, [current_drop_y + 1, x], sim_board_temp) and current_drop_y + 1 + len(block) <= self.height:
+                    current_drop_y += 1
+                
+                final_drop_pos = [current_drop_y, x]
+                
+                # Check if this placement is valid on the final dropped position
+                if not self._check_collision(block, final_drop_pos):
+                    test_board = self._simulate_placement(block, final_drop_pos)
+                    
+                    # Calculate features for this simulated board
+                    lines_cleared = self._calculate_lines_cleared_sim(test_board)
+                    holes = self._count_holes_sim(test_board)
+                    bumpiness = self._get_bumpiness_score_sim(test_board)
+                    height = self._calculate_stack_height_sim(test_board)
+                    
+                    features = [lines_cleared, holes, bumpiness, height]
+                    all_features.append(features)
+                    possible_actions.append((block, final_drop_pos)) # Store block and final position
+                else:
+                    # If even the initial placement or dropped placement is invalid, it's not a possible move
+                    logger.debug(f"Skipping invalid placement: rot={rot}, x={x}")
+
+
+        if not all_features:
+            logger.warning("No valid placement found after simulation! Game over.")
             self.game_over = True
+            return 0, True
+
+        features_array = np.array(all_features, dtype=np.float32)
+
+        if model_type == 'onnx':
+            ort_inputs = {placement_model.get_inputs()[0].name: features_array}
+            ort_outs = placement_model.run(None, ort_inputs)
+            scores = ort_outs[0].flatten() # Output is likely (num_placements, 1) or (num_placements,)
+        else: # Keras
+            scores = placement_model.predict(features_array, verbose=0).flatten() # Ensure it's 1D
+
+        best_index = np.argmax(scores)
+        best_score = scores[best_index]
+        block, pos = possible_actions[best_index]
+
+        logger.debug(f"Placing best block at position: y={pos[0]}, x={pos[1]}, score={best_score:.4f}")
+        self._place(block, pos)
+        
+        # Clear lines after actual placement
+        cleared = self._clear_lines()
+        self.score += cleared * 100
+        self.block_count += 1
+        self.last_placement = (pos[0] + len(block) - 1, pos[1] + len(block[0]) // 2)
+        logger.debug(f"Placed block. Cleared {cleared} lines. Total score: {self.score}")
+        
+        # Assign new powerup every 5 blocks
+        if self.block_count % 5 == 0 and self.block_count > 0:
+            self.current_powerup = random.choice(['bottom_clear', 'gravity', 'bomb'])
+            logger.info(f"New powerup assigned: {self.current_powerup}")
+            
+        return cleared * 100, self.game_over
     
-    def check_collision(self, piece, position):
-        """Check if piece collides with board or boundaries"""
-        py, px = position
-        for y in range(piece.shape[0]):
-            for x in range(piece.shape[1]):
-                if piece[y, x] == 1:
-                    new_y, new_x = py + y, px + x
-                    # Check boundaries and existing blocks
-                    if (new_y >= self.height or new_x < 0 or new_x >= self.width or
-                        (new_y >= 0 and self.board[new_y, new_x] != 0)):
-                        return True # Collision detected
+    def use_powerup(self):
+        if not self.current_powerup or self.game_over:
+            logger.debug("No powerup to use or game over")
+            return 0, self.board.copy()
+            
+        original_board = self.board.copy()
+        reward = 0
+        powerup_type = self.current_powerup
+        logger.info(f"Using powerup: {powerup_type}")
+        
+        if powerup_type == 'bottom_clear':
+            reward = self._clear_bottom_line()
+            
+        elif powerup_type == 'gravity':
+            reward = self._apply_gravity()
+            
+        elif powerup_type == 'bomb':
+            bomb_position = self._find_best_bomb_position()
+            logger.debug(f"Bomb placed at: {bomb_position}")
+            reward = self._use_bomb(bomb_position)
+        
+        # Clear any lines created by powerup
+        cleared = self._clear_lines()
+        reward += cleared * 100
+        self.score += reward
+        
+        logger.info(f"Powerup result: +{reward} points (cleared {cleared} lines)")
+        self.current_powerup = None
+        return reward, original_board
+    
+    def _find_best_bomb_position(self):
+        """Find position that maximizes blocks destroyed in 3x3 area"""
+        best_pos = (self.height // 2, self.width // 2)
+        max_destroyed = 0
+        
+        logger.debug("Finding optimal bomb position")
+        for y in range(1, self.height-1):
+            for x in range(1, self.width-1):
+                destroyed = 0
+                for dy in [-1, 0, 1]:
+                    for dx in [-1, 0, 1]:
+                        ny, nx = y + dy, x + dx
+                        if 0 <= ny < self.height and 0 <= nx < self.width and self.board[ny, nx]:
+                            destroyed += 1
+                if destroyed > max_destroyed:
+                    max_destroyed = destroyed
+                    best_pos = (y, x)
+        
+        logger.debug(f"Best bomb position: {best_pos} (destroys {max_destroyed} blocks)")
+        return best_pos
+    
+    def _clear_bottom_line(self):
+        """Clear bottom line powerup with reward calculation"""
+        blocks_cleared = np.sum(self.board[-1])
+        if blocks_cleared == 0:
+            logger.debug("Bottom line clear: Nothing to clear")
+            return 0
+        
+        logger.debug(f"Clearing bottom line: {blocks_cleared} blocks")
+        self.board[-1] = 0
+        for i in range(self.height-2, -1, -1):
+            self.board[i+1] = self.board[i]
+        self.board[0] = 0
+        return blocks_cleared * 5
+    
+    def _count_holes(self):
+        """Count holes (empty spaces with block above) on the actual board"""
+        holes = 0
+        for col in range(self.width):
+            found_block = False
+            for row in range(self.height-1, -1, -1):
+                if self.board[row, col]:
+                    found_block = True
+                elif found_block:
+                    holes += 1
+        return holes
+    
+    def _apply_gravity(self):
+        """Apply gravity powerup - pull down one line with reward"""
+        original_holes = self._count_holes()
+        logger.debug(f"Applying gravity. Original holes: {original_holes}")
+        
+        new_board = np.zeros_like(self.board)
+        for col in range(self.width):
+            col_blocks = []
+            for row in range(self.height):
+                if self.board[row, col]:
+                    col_blocks.append(1)
+            if col_blocks:
+                start_row = self.height - len(col_blocks)
+                new_board[start_row:, col] = 1
+        
+        self.board = new_board
+        new_holes = self._count_holes()
+        holes_filled = original_holes - new_holes
+        
+        logger.debug(f"Gravity result: Filled {holes_filled} holes")
+        return holes_filled * 3
+    
+    def _use_bomb(self, position):
+        """Use bomb powerup - destroy 3x3 area with reward"""
+        y, x = position
+        destroyed = 0
+        logger.debug(f"Exploding bomb at ({y}, {x})")
+        
+        for dy in [-1, 0, 1]:
+            for dx in [-1, 0, 1]:
+                ny, nx = y + dy, x + dx
+                if 0 <= ny < self.height and 0 <= nx < self.width:
+                    if self.board[ny, nx]:
+                        destroyed += 1
+                    self.board[ny, nx] = 0
+        
+        logger.debug(f"Bomb destroyed {destroyed} blocks")
+        return destroyed * 8
+    
+    # Modified _check_collision to accept an optional board argument
+    def _check_collision(self, block, pos, board_to_check=None):
+        if board_to_check is None:
+            board_to_check = self.board # Default to current game board
+        y, x = pos
+        for i in range(len(block)):
+            for j in range(len(block[0])):
+                if block[i][j]:
+                    if (y + i >= self.height or # Collided with bottom
+                        x + j < 0 or # Collided with left wall
+                        x + j >= self.width or # Collided with right wall
+                        (y + i >= 0 and board_to_check[y + i, x + j])): # Collided with existing block
+                        return True
         return False
     
-    def place_piece(self, piece, position):
-        """Place piece on board"""
-        py, px = position
-        for y in range(piece.shape[0]):
-            for x in range(piece.shape[1]):
-                if piece[y, x] == 1:
-                    new_y, new_x = py + y, px + x
-                    if 0 <= new_y < self.height and 0 <= new_x < self.width:
-                        self.board[new_y, new_x] = 1
-        self.pieces_placed += 1
+    def _place(self, block, pos):
+        y, x = pos
+        for i in range(len(block)):
+            for j in range(len(block[0])):
+                if block[i][j]:
+                    # Check if placement goes above the board, indicating game over
+                    if y + i < 0:
+                        logger.warning("Block placed above board! Game over.")
+                        self.game_over = True
+                        return
+                    if y + i < self.height: # Ensure it's within bounds vertically
+                        self.board[y + i, x + j] = 1
+        self._new_block()
     
-    def clear_lines(self):
-        """Clear completed lines and return number of lines cleared"""
-        lines_to_clear = []
-        for y in range(self.height):
-            if np.all(self.board[y] == 1):
-                lines_to_clear.append(y)
+    def _clear_lines(self):
+        full_lines = []
+        for i in range(self.height):
+            if all(self.board[i]):
+                full_lines.append(i)
         
-        for y in reversed(lines_to_clear):
-            self.board = np.delete(self.board, y, axis=0)
+        for line in full_lines:
+            self.board = np.delete(self.board, line, axis=0)
             self.board = np.vstack([np.zeros((1, self.width)), self.board])
         
-        lines_cleared = len(lines_to_clear)
-        self.lines_cleared += lines_cleared
-        self.score += lines_cleared * 100 + self.pieces_placed * 10  # Score for pieces + lines
-        return lines_cleared
+        if full_lines:
+            logger.debug(f"Cleared {len(full_lines)} lines")
+        return len(full_lines)
     
-    def move_piece_down(self):
-        """Move current piece down, return True if successful"""
-        if self.current_piece is None:
-            return False
-            
-        new_pos = (self.piece_position[0] + 1, self.piece_position[1])
-        if not self.check_collision(self.current_piece, new_pos):
-            self.piece_position = new_pos
-            return True
-        else:
-            # Place piece and spawn new one
-            self.place_piece(self.current_piece, self.piece_position)
-            self.clear_lines()
-            self.spawn_new_piece()
-            return False
-    
-    def apply_powerup(self, powerup_type, position=None):
-        """Apply powerup effect and return effectiveness score"""
-        effectiveness = 0
-        
-        if powerup_type == PowerUpType.BOTTOM_LINE_CLEAR:
-            # Clear bottom line if it has blocks
-            bottom_blocks = np.sum(self.board[-1])
-            if bottom_blocks > 0:
-                self.board = np.delete(self.board, -1, axis=0)
-                self.board = np.vstack([np.zeros((1, self.width)), self.board])
-                effectiveness = bottom_blocks * 10
-                self.score += effectiveness
-                print(f"Bottom line cleared! Removed {bottom_blocks} blocks, score +{effectiveness}")
-                return effectiveness
-            else:
-                print("Bottom line clear - no blocks to remove")
-                return 0
-        
-        elif powerup_type == PowerUpType.GRAVITY:
-            # Apply gravity to fill holes
-            blocks_moved = 0
-            for x in range(self.width):
-                column = self.board[:, x]
-                filled_blocks = column[column == 1]
-                empty_count = len(column) - len(filled_blocks)
-                
-                if empty_count > 0 and len(filled_blocks) > 0:
-                    # Count how many blocks will move
-                    for y in range(len(column)):
-                        if column[y] == 0:
-                            # Check if there are blocks above
-                            if np.any(column[y:] == 1):
-                                blocks_moved += 1
-                                break
-                    
-                    # Apply gravity
-                    empty_blocks = np.zeros(empty_count)
-                    self.board[:, x] = np.concatenate([empty_blocks, filled_blocks])
-            
-            if blocks_moved > 0:
-                effectiveness = blocks_moved * 5
-                self.score += effectiveness
-                print(f"Gravity applied! Moved {blocks_moved} blocks, score +{effectiveness}")
-                return effectiveness
-            else:
-                print("Gravity - no blocks to move")
-                return 0
-        
-        elif powerup_type == PowerUpType.BOMB:
-            # Bomb destroys 3x3 area
-            if position is None:
-                # Find a good position with blocks
-                best_pos = None
-                max_blocks = 0
-                for py in range(1, self.height - 1):
-                    for px in range(1, self.width - 1):
-                        block_count = 0
-                        for y in range(py - 1, py + 2):
-                            for x in range(px - 1, px + 2):
-                                if self.board[y, x] == 1:
-                                    block_count += 1
-                        if block_count > max_blocks:
-                            max_blocks = block_count
-                            best_pos = (py, px)
-                position = best_pos if best_pos else (self.height // 2, self.width // 2)
-            
-            py, px = position
-            destroyed = 0
-            for y in range(max(0, py - 1), min(self.height, py + 2)):
-                for x in range(max(0, px - 1), min(self.width, px + 2)):
-                    if self.board[y, x] == 1:
-                        self.board[y, x] = 0
-                        destroyed += 1
-            
-            if destroyed > 0:
-                effectiveness = destroyed * 8
-                self.score += effectiveness
-                print(f"Bomb exploded at ({py},{px})! Destroyed {destroyed} blocks, score +{effectiveness}")
-                return effectiveness
-            else:
-                print("Bomb - no blocks destroyed")
-                return 0
-        
-        return 0
-    
-    def get_features(self):
-        """Extract features for ML model"""
-        features = []
-        
-        # 1. Board density
-        features.append(np.sum(self.board) / (self.width * self.height))
-        
-        # 2. Height of each column
-        heights = []
-        for x in range(self.width):
-            column = self.board[:, x]
-            height = 0
-            for y in range(self.height):
-                if column[y] == 1:
-                    height = self.height - y
-                    break
-            heights.append(height)
-        
-        features.extend(heights)
-        
-        # 3. Number of holes
+    def _simulate_placement(self, block, pos):
+        sim_board = self.board.copy()
+        y, x = pos
+        for i in range(len(block)):
+            for j in range(len(block[0])):
+                if block[i][j]:
+                    # Assuming collision check has already ensured validity for the final position
+                    sim_board[y + i, x + j] = 1
+        return sim_board
+
+    # --- Feature Calculation for Simulated Boards (Python equivalents of C# logic) ---
+
+    def _calculate_lines_cleared_sim(self, sim_board):
+        """Calculates how many lines would be cleared on a simulated board."""
+        full_lines = 0
+        for r in range(self.height):
+            if all(sim_board[r]):
+                full_lines += 1
+        return full_lines
+
+    def _count_holes_sim(self, sim_board):
+        """Counts holes on a simulated board."""
         holes = 0
-        for x in range(self.width):
-            column = self.board[:, x]
+        for col in range(self.width):
             found_block = False
-            for y in range(self.height):
-                if column[y] == 1:
+            for row in range(self.height): # Iterate from top to bottom
+                if sim_board[row, col] == 1:
                     found_block = True
-                elif found_block and column[y] == 0:
+                elif found_block and sim_board[row, col] == 0:
                     holes += 1
-        features.append(holes)
+        return holes
+
+    def _get_bumpiness_score_sim(self, sim_board):
+        """Calculates bumpiness score for a simulated board."""
+        heights = np.zeros(self.width, dtype=int)
+        for col in range(self.width):
+            for row in range(self.height):
+                if sim_board[row, col] == 1:
+                    heights[col] = self.height - row # Height from top
+                    break
         
-        # 4. Bumpiness (height differences between adjacent columns)
         bumpiness = 0
-        for i in range(len(heights) - 1):
-            bumpiness += abs(heights[i] - heights[i + 1])
-        features.append(bumpiness)
-        
-        # 5. Maximum height
-        features.append(max(heights))
-        
-        # 6. Number of complete lines
-        complete_lines = 0
-        for y in range(self.height):
-            if np.all(self.board[y] == 1):
-                complete_lines += 1
-        features.append(complete_lines)
-        
-        # 7. Bottom line density
-        bottom_line_density = np.sum(self.board[-1]) / self.width
-        features.append(bottom_line_density)
-        
-        # 8. Score (normalized)
-        features.append(self.score / 1000)
-        
-        return np.array(features, dtype=np.float32)
+        for i in range(self.width - 1):
+            bumpiness += abs(heights[i] - heights[i+1])
+        return bumpiness
 
-# DQN Neural Network
-class DQNNetwork(nn.Module):
-    def __init__(self, input_size, hidden_size=128):
-        super(DQNNetwork, self).__init__()
-        self.fc1 = nn.Linear(input_size, hidden_size)
-        self.fc2 = nn.Linear(hidden_size, hidden_size)
-        self.fc3 = nn.Linear(hidden_size, 64)
-        self.fc4 = nn.Linear(64, 4)  # 4 actions: use powerup 0, 1, 2, or don't use (3)
-        
-        self.init_weights()
-    
-    def init_weights(self):
-        for layer in [self.fc1, self.fc2, self.fc3, self.fc4]:
-            nn.init.xavier_uniform_(layer.weight)
-            nn.init.zeros_(layer.bias)
-    
-    def forward(self, x):
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = F.relu(self.fc3(x))
-        x = self.fc4(x)
-        return x
+    def _calculate_stack_height_sim(self, sim_board):
+        """Calculates maximum height of the stack on a simulated board."""
+        for row in range(self.height):
+            if np.any(sim_board[row] == 1):
+                return self.height - row
+        return 0 # Empty board
 
-class DQNAgent:
-    def __init__(self, state_size, action_size=4, lr=0.001):
-        self.state_size = state_size
-        self.action_size = action_size
-        self.memory = deque(maxlen=10000)
+class PowerupDQNAgent:
+    def __init__(self, board_size, powerup_size):
+        self.board_size = board_size
+        self.powerup_size = powerup_size
+        self.memory = deque(maxlen=5000)
+        self.gamma = 0.95
         self.epsilon = 1.0
         self.epsilon_min = 0.01
         self.epsilon_decay = 0.995
-        self.learning_rate = lr
-        self.gamma = 0.95
-        self.batch_size = 32
-        
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        
-        self.q_network = DQNNetwork(state_size).to(self.device)
-        self.target_network = DQNNetwork(state_size).to(self.device)
-        self.optimizer = optim.Adam(self.q_network.parameters(), lr=lr)
-        self.criterion = nn.MSELoss()
-        
-        self.update_target_network()
-        self.losses = []
+        self.learning_rate = 0.001
+        self.model = self._build_model()
+        self.target_model = self._build_model()
+        self.update_target_model()
+        logger.info("Powerup DQN Agent initialized")
     
-    def update_target_network(self):
-        self.target_network.load_state_dict(self.q_network.state_dict())
+    def _build_model(self):
+        # Input to PowerupDQNAgent model is board_size (flattened board) + powerup_size
+        model = Sequential([
+            Dense(256, input_dim=self.board_size + self.powerup_size, activation='relu'),
+            Dense(128, activation='relu'),
+            Dense(64, activation='relu'),
+            Dense(2, activation='linear') # Output for 2 actions: Use powerup (1) or Don't use (0)
+        ])
+        model.compile(loss='mse', optimizer=Adam(learning_rate=self.learning_rate))
+        return model
     
-    def remember(self, state, action, reward, next_state, done):
-        self.memory.append((state, action, reward, next_state, done))
+    def update_target_model(self):
+        self.target_model.set_weights(self.model.get_weights())
+        logger.debug("Updated target model weights")
     
-    def act(self, state, available_powerup=None):
-        if available_powerup is None:
-            return 3  # No powerup available
-        
-        if random.random() <= self.epsilon:
-            # Random action: either use the available powerup or don't use it
-            return random.choice([available_powerup.value, 3])
-        
-        state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
-        self.q_network.eval()
-        with torch.no_grad():
-            q_values = self.q_network(state_tensor)
-        self.q_network.train()
-        
-        return q_values.argmax().item()
+    def remember(self, board, powerup, action, reward, next_board, next_powerup, done):
+        self.memory.append((board, powerup, action, reward, next_board, next_powerup, done))
     
-    def replay(self):
-        if len(self.memory) < self.batch_size:
+    def act(self, board, powerup):
+        if np.random.rand() <= self.epsilon:
+            action = random.choice([0, 1])
+            logger.debug(f"Random action: {action}")
+            return action
+        
+        flat_board = board.flatten()
+        state = np.concatenate([flat_board, powerup]).reshape(1, -1)
+        q_values = self.model.predict(state, verbose=0)
+        action = np.argmax(q_values[0])
+        logger.debug(f"Model action: {action}, Q-values: {q_values[0]}")
+        return action
+    
+    def replay(self, batch_size=32):
+        if len(self.memory) < batch_size:
+            logger.debug("Not enough samples for replay")
             return
+            
+        minibatch = random.sample(self.memory, batch_size)
+        logger.debug(f"Running replay with {batch_size} samples")
         
-        batch = random.sample(self.memory, self.batch_size)
-        states = torch.FloatTensor([e[0] for e in batch]).to(self.device)
-        actions = torch.LongTensor([e[1] for e in batch]).to(self.device)
-        rewards = torch.FloatTensor([e[2] for e in batch]).to(self.device)
-        next_states = torch.FloatTensor([e[3] for e in batch]).to(self.device)
-        dones = torch.BoolTensor([e[4] for e in batch]).to(self.device)
-        
-        current_q_values = self.q_network(states).gather(1, actions.unsqueeze(1))
-        next_q_values = self.target_network(next_states).max(1)[0].detach()
-        target_q_values = rewards + (self.gamma * next_q_values * (~dones))
-        
-        loss = self.criterion(current_q_values.squeeze(), target_q_values)
-        
-        self.optimizer.zero_grad()
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(self.q_network.parameters(), 1.0)
-        self.optimizer.step()
-        
-        self.losses.append(loss.item())
+        for board, powerup, action, reward, next_board, next_powerup, done in minibatch:
+            flat_board = board.flatten()
+            state = np.concatenate([flat_board, powerup])
+            next_flat_board = next_board.flatten()
+            next_state = np.concatenate([next_flat_board, next_powerup])
+            
+            target = self.model.predict(state.reshape(1, -1), verbose=0)
+            if done:
+                target[0][action] = reward
+            else:
+                t = self.target_model.predict(next_state.reshape(1, -1), verbose=0)
+                target[0][action] = reward + self.gamma * np.amax(t)
+            
+            self.model.fit(state.reshape(1, -1), target, epochs=1, verbose=0)
         
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+            logger.debug(f"Epsilon decayed to: {self.epsilon:.4f}")
+    
+    def save(self, name):
+        self.model.save(name)
+        logger.info(f"Saved model as {name}")
 
-class TetrisEnvironment:
-    def __init__(self):
-        self.board = TetrisBoard()
-        self.powerup_threshold = 20  # Lower threshold for more frequent powerups
-        self.powerup_interval = 5   # Give powerup every 20 pieces
-        self.current_powerup = None
-        self.powerup_available = False
-        self.steps = 0
-        self.max_steps = 500
-        self.powerup_decisions = 0
-        
-    def reset(self):
-        self.board = TetrisBoard()
-        self.current_powerup = None
-        self.powerup_available = False
-        self.steps = 0
-        self.powerup_decisions = 0
-        return self.board.get_features()
-    
-    def step(self, action):
-        self.steps += 1
-        reward = 0
-        done = False
+def load_block_placement_model(model_path, model_type='keras'):
+    logger.info(f"Loading block placement model: {model_path}")
+    if model_type == 'onnx':
+        return ort.InferenceSession(model_path)
+    else:
+        # For Keras, if you load a model that expects (None, 4) features, it will work.
+        # This assumes your 'tetris_model.keras' is the one that expects 4 features.
+        return load_model(model_path)
 
-        print(f"🔍 Powerup check: Pieces={self.board.pieces_placed} "
-        f"(Need {self.powerup_interval}) | "
-        f"Score={self.board.score} (Need {self.powerup_threshold})")
-        
-        # **POWERUP ASSIGNMENT LOGIC**
-        # Give powerup every 'powerup_interval' pieces placed OR when score reaches threshold
-        if (self.board.pieces_placed > 0 and 
-            self.board.pieces_placed % self.powerup_interval == 0 and 
-            not self.powerup_available):
-            
-            self.current_powerup = random.choice(list(PowerUpType))
-            self.powerup_available = True
-            print(f"\n🎁 POWERUP ASSIGNED: {self.current_powerup.name} at piece {self.board.pieces_placed}")
-        
-        # **POWERUP DECISION HANDLING**
-        if self.powerup_available and self.current_powerup is not None:
-            self.powerup_decisions += 1
-            
-            if action == self.current_powerup.value:
-                # Agent chose to USE the powerup
-                old_score = self.board.score
-                effectiveness = self.board.apply_powerup(self.current_powerup)
-                
-                if effectiveness > 0:
-                    reward += effectiveness * 2  # Reward for effective use
-                    print(f"✅ POWERUP USED effectively! Reward: +{effectiveness * 2}")
-                else:
-                    reward -= 20  # Penalty for ineffective use
-                    print(f"❌ POWERUP USED ineffectively! Penalty: -20")
-                
-                # Powerup consumed
-                self.powerup_available = False
-                self.current_powerup = None
-                
-            elif action == 3:
-                # Agent chose NOT to use powerup
-                reward += self.evaluate_not_using_powerup()
-                print(f"🤔 POWERUP NOT USED. Reward: +{self.evaluate_not_using_powerup()}")
-                
-                # Powerup consumed (decision made)
-                self.powerup_available = False
-                self.current_powerup = None
-            
-            else:
-                # Agent chose wrong action (shouldn't happen with proper logic)
-                reward -= 10
-                print(f"⚠️ WRONG ACTION: chose {action} for powerup {self.current_powerup.value}")
-        
-        # **GAME SIMULATION**
-        old_score = self.board.score
-        self.board.move_piece_down()
-        
-        # Reward for score increase
-        score_diff = self.board.score - old_score
-        reward += score_diff * 0.1
-        
-        # Small step penalty to encourage efficiency
-        reward -= 1
-        
-        # **TERMINATION CONDITIONS**
-        if self.board.game_over:
-            done = True
-            reward -= 100
-            print(f"💀 GAME OVER! Final score: {self.board.score}")
-        elif self.steps >= self.max_steps:
-            done = True
-            print(f"⏰ MAX STEPS REACHED! Final score: {self.board.score}")
-        
-        return self.board.get_features(), reward, done
-    
-    def evaluate_not_using_powerup(self):
-        """Evaluate whether NOT using powerup was a good decision"""
-        if self.current_powerup == PowerUpType.BOTTOM_LINE_CLEAR:
-            bottom_density = np.sum(self.board.board[-1]) / self.board.width
-            return 10 if bottom_density < 0.3 else -10
-        
-        elif self.current_powerup == PowerUpType.GRAVITY:
-            features = self.board.get_features()
-            holes = features[11]
-            return 10 if holes < 2 else -10
-        
-        elif self.current_powerup == PowerUpType.BOMB:
-            density = features[0] if 'features' in locals() else self.board.get_features()[0]
-            return 10 if density < 0.3 else -10
-        
-        return 5
+# Training parameters
+EPISODES = 1000
+BATCH_SIZE = 32
+UPDATE_TARGET_EVERY = 50
 
-def train_dqn_agent(episodes=500):
-    """Train DQN agent with detailed logging"""
-    print("🚀 Starting DQN Training...")
-    print("=" * 60)
+def main():
+    logger.info("Starting Tetris AI training")
     
-    env = TetrisEnvironment()
-    state_size = len(env.board.get_features())
-    agent = DQNAgent(state_size)
+    # Initialize game environment
+    env = Tetris(width=10, height=20)
+    board_size = env.height * env.width # This is for the PowerupDQN agent input
     
-    scores = []
-    powerup_decisions = []
-    episode_rewards = []
+    # Load block placement model
+    try:
+        # Assuming tetris_model.keras is the one expecting 4 features now
+        block_placement_model = load_block_placement_model('model/tetris_model.keras', 'keras')
+        model_type = 'keras'
+        logger.info("Using Keras model for block placement (4 features input)")
+    except Exception as e:
+        logger.warning(f"Keras model not found or incompatible: {e}, trying ONNX model")
+        try:
+            block_placement_model = load_block_placement_model('model/tetris_dqn.onnx', 'onnx') # This is the ONNX model expecting 4 features
+            model_type = 'onnx'
+            logger.info("Using ONNX model for block placement (4 features input)")
+        except Exception as e:
+            logger.error(f"Failed to load any model: {e}")
+            return
     
-    print(f"📊 Training Configuration:")
-    print(f"   State size: {state_size}")
-    print(f"   Action size: {agent.action_size}")
-    print(f"   Episodes: {episodes}")
-    print(f"   Device: {agent.device}")
-    print("=" * 60)
+    # Initialize powerup agent
+    powerup_agent = PowerupDQNAgent(board_size=board_size, powerup_size=3)
     
-    for episode in range(episodes):
-        state = env.reset()
+    # Training loop
+    for episode in range(EPISODES):
+        board, powerup = env.reset()
         total_reward = 0
-        powerup_count = 0
+        done = False
+        step = 0
         
-        print(f"\n🎮 Episode {episode + 1}/{episodes}")
-        print(f"   Starting score: {env.board.score}")
+        logger.info(f"Starting episode {episode+1}/{EPISODES}")
         
-        while True:
-            # Show current state
-            if env.powerup_available:
-                print(f"🎁 POWERUP AVAILABLE! {env.current_powerup.name} | "
-                    f"Pieces: {env.board.pieces_placed} | "
-                    f"Score: {env.board.score}")
-            
-            # Agent makes decision
-            action = agent.act(state, env.current_powerup if env.powerup_available else None)
-            
-            # Environment step
-            next_state, reward, done = env.step(action)
-            
-            # Store experience for training
-            agent.remember(state, action, reward, next_state, done)
-            
-            state = next_state
-            total_reward += reward
-            
-            if env.powerup_decisions > powerup_count:
-                powerup_count = env.powerup_decisions
-            
-            # Train neural network
-            agent.replay()
+        while not done:
+            # Place block using pre-trained model (now expects features)
+            block_reward, done = env.place_block(block_placement_model, model_type)
+            total_reward += block_reward
             
             if done:
+                logger.info(f"Episode {episode+1} ended early at step {step}")
                 break
-        
-        # Episode summary
-        scores.append(env.board.score)
-        powerup_decisions.append(powerup_count)
-        episode_rewards.append(total_reward)
-        
-        print(f"   📊 Episode {episode + 1} Summary:")
-        print(f"      Final score: {env.board.score}")
-        print(f"      Total reward: {total_reward:.2f}")
-        print(f"      Powerup decisions: {powerup_count}")
-        print(f"      Steps: {env.steps}")
-        print(f"      Epsilon: {agent.epsilon:.3f}")
-        print(f"      Memory size: {len(agent.memory)}")
-        
-        # Update target network every 50 episodes
-        if episode % 50 == 0:
-            agent.update_target_network()
-            print(f"   🎯 Target network updated!")
-        
-        # Progress report every 25 episodes
-        if episode % 25 == 0 and episode > 0:
-            recent_scores = scores[-25:]
-            recent_rewards = episode_rewards[-25:]
-            recent_powerups = powerup_decisions[-25:]
             
-            print(f"\n📈 Progress Report (Episodes {episode-24}-{episode+1}):")
-            print(f"   Average score: {np.mean(recent_scores):.2f}")
-            print(f"   Average reward: {np.mean(recent_rewards):.2f}")
-            print(f"   Average powerup decisions: {np.mean(recent_powerups):.2f}")
-            print(f"   Average loss: {np.mean(agent.losses[-100:]) if len(agent.losses) > 0 else 0:.4f}")
+            # Power-up decision
+            if env.current_powerup:
+                current_board, current_powerup_vec = env.get_state()
+                action = powerup_agent.act(current_board, current_powerup_vec)
+                
+                if action == 1:  # Use power-up
+                    powerup_reward, original_board_state_before_powerup = env.use_powerup()
+                    total_reward += powerup_reward
+                    next_board, next_powerup_vec = env.get_state()
+                    done = env.game_over
+                    
+                    # Store experience
+                    powerup_agent.remember(
+                        original_board_state_before_powerup, current_powerup_vec, # Use original board state before powerup as state
+                        action, powerup_reward, 
+                        next_board, next_powerup_vec, 
+                        done
+                    )
+                    logger.debug("Stored powerup usage experience")
+                else:
+                    # If not using power-up, store with no immediate change, reward is 0
+                    # The state and next state should ideally reflect that the powerup was NOT used
+                    next_board_state_after_block_placement, next_powerup_vec = env.get_state() # Get state AFTER block placement
+                    powerup_agent.remember(
+                        current_board, current_powerup_vec, # The state when the decision was made
+                        action, 0, # Reward for not using powerup
+                        next_board_state_after_block_placement, next_powerup_vec, # Next state is after block placement (no powerup used)
+                        False # Not done just because we didn't use a powerup
+                    )
+                    logger.debug("Stored powerup skip experience")
+                
+                # Train agent periodically
+                if step % 5 == 0:
+                    powerup_agent.replay(BATCH_SIZE)
+                
+                # Update target network periodically
+                if step % UPDATE_TARGET_EVERY == 0:
+                    powerup_agent.update_target_model()
+                
+            step += 1
+        
+        logger.info(f"Episode {episode+1} completed. Total Reward: {total_reward}, Epsilon: {powerup_agent.epsilon:.4f}")
     
-    print("\n🎉 Training completed!")
-    return agent, scores, powerup_decisions, episode_rewards
-
-def test_powerups_individually():
-    """Test each powerup individually to verify they work"""
-    print("🔧 Testing Powerups Individually...")
-    print("=" * 50)
-    
-    for powerup in PowerUpType:
-        print(f"\n🧪 Testing {powerup.name}:")
-        board = TetrisBoard()
-        
-        print(f"   Before: Score = {board.score}")
-        print(f"   Board density: {np.sum(board.board)/(board.width * board.height):.2f}")
-        
-        effectiveness = board.apply_powerup(powerup)
-        
-        print(f"   After: Score = {board.score}")
-        print(f"   Effectiveness: {effectiveness}")
-        print(f"   New density: {np.sum(board.board)/(board.width * board.height):.2f}")
+    # Save trained model
+    powerup_agent.save("model/powerup_dqn.keras")
+    logger.info("Training complete. Saved powerup DQN model")
 
 if __name__ == "__main__":
-    # First test powerups
-    test_powerups_individually()
-    
-    # Then train
-    agent, scores, powerup_decisions, episode_rewards = train_dqn_agent(episodes=200)
-    
-    # Results
-    print(f"\n📊 Final Results:")
-    print(f"   Average score (last 50): {np.mean(scores[-50:]):.2f}")
-    print(f"   Average powerup decisions (last 50): {np.mean(powerup_decisions[-50:]):.2f}")
-    print(f"   Best score: {max(scores)}")
-    print(f"   Total powerup decisions: {sum(powerup_decisions)}")
-    
-    # Save model
-    torch.save(agent.q_network.state_dict(), 'tetris_powerup_dqn.pth')
-    print(f"\n💾 Model saved as 'tetris_powerup_dqn.pth'")
+    main()
