@@ -47,7 +47,7 @@ class TetrisTrainer:
             self.agent = DQNAgent(state_size=208, tensorboard_log_dir=tensorboard_log_dir, epsilon_noise=True)
         elif agent_type == 'greedy':
             # Greedy rollout agent
-            self.agent = DQNAgentGreedy(state_size=208, tensorboard_log_dir=tensorboard_log_dir)
+            self.agent = DQNAgentGreedy(state_size=200, tensorboard_log_dir=tensorboard_log_dir)
         elif agent_type == "nuna":
             self.agent = EnhancedDQNAgent(tensorboard_log_dir=tensorboard_log_dir)
         elif agent_type.startswith('sb3_'):

@@ -60,65 +60,38 @@ class NoisyLinear(nn.Module):
         return F.linear(input, weight, bias)
 
 class TetrisDQN(nn.Module):
-    def __init__(self, input_size, hidden_size=512, output_size=40):
+    def __init__(self, input_size=200, hidden_size=512, output_size=40):
         super(TetrisDQN, self).__init__()
-        
-        standard_height = 20
 
-        # --- shared encoder as before ---
-        self.board_cnn = nn.Sequential(
-            nn.Conv2d(1, 16, kernel_size=3, padding=1), nn.ReLU(),
-            nn.Conv2d(16, 32, kernel_size=3, padding=1), nn.ReLU(),
-            nn.Flatten(),
-            nn.Linear(32 * standard_height * 10, 128), nn.ReLU()
-        )
+        # --- individual input encoders ---
+        self.board_mlp      = nn.Sequential(nn.Linear(input_size, 128), nn.ReLU())
         self.piece_mlp      = nn.Sequential(nn.Linear(4, 32), nn.ReLU())
         self.metrics_mlp    = nn.Sequential(nn.Linear(5, 32), nn.ReLU())
-        self.heights_mlp    = nn.Sequential(nn.Linear(10,32), nn.ReLU())
+        self.heights_mlp    = nn.Sequential(nn.Linear(10, 32), nn.ReLU())
         self.next_piece_mlp = nn.Sequential(nn.Linear(7, 32), nn.ReLU())
         self.curr_mlp       = nn.Sequential(nn.Linear(9, 32), nn.ReLU())
 
-        # --- fusion layer ---
-        total_feats = 128 + 32*5  # = 288
-        # self.fc_hidden = NoisyLinear(total_feats, hidden_size)
-        self.fc_hidden = nn.Linear(total_feats, hidden_size)
-        self.relu = nn.ReLU()
-
-        # --- dueling streams ---
-        # self.value_stream     = NoisyLinear(hidden_size, 1)
-        # self.advantage_stream = NoisyLinear(hidden_size, output_size)
-        self.value_stream     = nn.Linear(hidden_size, 1)
-        self.advantage_stream = nn.Linear(hidden_size, output_size)
-
-        # store for resetting noise
-        self.noisy_layers = [self.fc_hidden, self.value_stream, self.advantage_stream]
-    
-    def reset_noise(self):
-        for layer in self.noisy_layers:
-            layer.reset_noise()
+        # --- fused network ---
+        total_feats = 128 + 32 * 5  # = 288
+        self.hidden = nn.Sequential(
+            nn.Linear(total_feats, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, output_size)
+        )
 
     def forward(self, board, piece_info, metrics, heights, next_piece, curriculum):
-        # FIX 3: Removed inefficient noise reset from forward pass
-        # self.reset_noise()  # ❌ REMOVED - too frequent!
-
-        # encode
-        b = self.board_cnn(board)
+        # encode each feature stream
+        b = self.board_mlp(board.view(board.size(0), -1))
         p = self.piece_mlp(piece_info)
         m = self.metrics_mlp(metrics)
         h = self.heights_mlp(heights)
         n = self.next_piece_mlp(next_piece)
         c = self.curr_mlp(curriculum)
 
-        # fuse
+        # concatenate all features and run through final layers
         x = torch.cat([b, p, m, h, n, c], dim=1)
-        x = self.relu(self.fc_hidden(x))
-
-        # dueling outputs
-        v = self.value_stream(x)                    # [batch, 1]
-        a = self.advantage_stream(x)                # [batch, action_dim]
-        q = v + a - a.mean(dim=1, keepdim=True)     # broadcast v
-
-        return q
+        q_values = self.hidden(x)
+        return q_values
 
 class DQNAgentGreedy:
     def __init__(self, state_size, action_size=40, lr=0.001,epsilon_start=1.0,
@@ -168,13 +141,10 @@ class DQNAgentGreedy:
 
         
         # FIX 3: Add noise reset control
-        self.noise_reset_frequency = 100  # Reset noise every N steps
-        self.last_noise_reset = 0
         
         # Log model architecture
         self.writer.add_text('Model/Architecture', str(self.q_network))
         self.writer.add_text('Model/Parameters', f"Total parameters: {sum(p.numel() for p in self.q_network.parameters())}")
-        print(f"DQN w/ NoisyNets & Dueling initialized on {device}")
         self.writer.add_text('Model/Architecture', str(self.q_network))
 
     
